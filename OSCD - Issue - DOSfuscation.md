@@ -15,7 +15,7 @@ There is only one Sigma rule that is focusing on cmd.exe commandline obfuscation
 ## Solution
 
 We developed a table with pre-generated CMD commands, obfuscated by the [Invoke-DOSfuscation](https://github.com/danielbohannon/Invoke-DOSfuscation) framework, you can pick up some of the tasks in that table and develop Sigma rules for them.<br>
-You will need to use [regular expressions](https://github.com/Neo23x0/sigma/wiki/Specification#types) in Sigma rules. Here is a [Sigma rule](https://github.com/Neo23x0/sigma/blob/master/rules/windows/process_creation/win_invoke_obfuscation_obfuscated_iex_commandline.yml) developed by Daniel Bohannon that utilize regular expressions in Sigma rule:
+You will need to use [regular expressions](https://github.com/Neo23x0/sigma/wiki/Specification#types) in Sigma rules. Here is a [Sigma rule](https://github.com/Neo23x0/sigma/blob/master/rules/windows/process_creation/win_invoke_obfuscation_obfuscated_iex_commandline.yml) developed by Daniel Bohannon (@danielhbohannon) that utilize regular expressions in Sigma rule:
 ```YAML
 title: Invoke-Obfuscation Obfuscated IEX Invocation
 id: 4bf943c6-5146-4273-98dd-e958fd1e3abf
