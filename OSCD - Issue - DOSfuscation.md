@@ -12,8 +12,7 @@ The majority (>50%) of Sigma rules are based on command-line events (WEL Securit
 
 There is only one Sigma rule that is focusing on cmd.exe commandline obfuscation detection — [rules/windows/process_creation/win_susp_cli_escape.yml](https://github.com/Neo23x0/sigma/blob/master/rules/windows/process_creation/win_susp_cli_escape.yml). The most of the methods, supported by [Invoke-DOSfuscation](https://github.com/danielbohannon/Invoke-DOSfuscation) are not covered at all.
 
-You will need to use [regular expressions](https://github.com/Neo23x0/sigma/wiki/Specification#types) in Sigma rules.<br>
-Here is a [Sigma rule](https://github.com/Neo23x0/sigma/blob/master/rules/windows/process_creation/win_invoke_obfuscation_obfuscated_iex_commandline.yml) developed by Daniel Bohannon that utilize regular expressions in Sigma rule:
+You will need to use [regular expressions](https://github.com/Neo23x0/sigma/wiki/Specification#types) in Sigma rules. Here is a [Sigma rule](https://github.com/Neo23x0/sigma/blob/master/rules/windows/process_creation/win_invoke_obfuscation_obfuscated_iex_commandline.yml) developed by Daniel Bohannon that utilize regular expressions in Sigma rule:
 ```YAML
 title: Invoke-Obfuscation Obfuscated IEX Invocation
 id: 4bf943c6-5146-4273-98dd-e958fd1e3abf
@@ -41,3 +40,7 @@ falsepositives:
     - Unknown
 level: high
 ```
+
+## Solution
+
+We developed a table with pre-generated PowerShell commands, obfuscated by the [Invoke-Obfuscation](https://github.com/danielbohannon/Invoke-Obfuscation) framework, you can pick up some of the tasks in that table and develop Sigma rules for them. 
