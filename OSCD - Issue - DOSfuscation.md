@@ -43,3 +43,6 @@ falsepositives:
     - Unknown
 level: high
 ```
+
+## The Approach
+
