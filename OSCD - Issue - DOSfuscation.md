@@ -12,7 +12,7 @@ The majority (>50%) of Sigma rules are based on command-line events (WEL Securit
 
 There is only one Sigma rule that is focusing on cmd.exe commandline obfuscation detection — [rules/windows/process_creation/win_susp_cli_escape.yml](https://github.com/Neo23x0/sigma/blob/master/rules/windows/process_creation/win_susp_cli_escape.yml). The most of the methods, supported by [Invoke-DOSfuscation](https://github.com/danielbohannon/Invoke-DOSfuscation) are not covered at all.
 
-You can pick up some of the methods of cmd.exe commandline obfuscation, provided by the [Invoke-DOSfuscation](https://github.com/danielbohannon/Invoke-DOSfuscation) framework and develop Sigma rules for them. You will need to use [regular expressions](https://github.com/Neo23x0/sigma/wiki/Specification#types) in Sigma rules.
+You can pick up some of the methods of cmd.exe commandline obfuscation, provided by the [Invoke-DOSfuscation](https://github.com/danielbohannon/Invoke-DOSfuscation) framework and develop Sigma rules for them. You will need to use [regular expressions](https://github.com/Neo23x0/sigma/wiki/Specification#types) in Sigma rules.<br>
 Here is a [Sigma rule](https://github.com/Neo23x0/sigma/blob/master/rules/windows/process_creation/win_invoke_obfuscation_obfuscated_iex_commandline.yml) developed by Daniel Bohannon that utilize regular expressions in Sigma rule:
 ```
 title: Invoke-Obfuscation Obfuscated IEX Invocation
