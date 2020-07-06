@@ -4,6 +4,7 @@
 - Author: Daniel Bohannon, @danielhbohannon
 - Type: Offensive tool, threat simulation
 - Materials:
+    * [Techniques FOR %F IN (-style) DO (S-level CMD Obfuscation)](https://i.blackhat.com/briefings/asia/2018/asia-18-bohannon-invoke_dosfuscation_techniques_for_fin_style_dos_level_cmd_obfuscation.pdf)
     * [WHITE PAPER | DOSFUSCATION: EXPLORING THE DEPTHS OF CMD.EXE OBFUSCATION & DETECTION TECHNIQUES](https://www.fireeye.com/content/dam/fireeye-www/blog/pdfs/dosfuscation-report.pdf)
 
 ## Problem
