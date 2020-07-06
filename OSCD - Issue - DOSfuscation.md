@@ -82,6 +82,7 @@ Another example is CMD argument obfuscation. An obvious first choice would be an
 * Whitespace is not required before or after the ```/C``` argument: ```cmd/Ccalc```
 * Caret characters can break up the argument: ```cmd^/^C^calc```
 * Even if detection authors account for whitespace and caret obfuscation characters applied to the ```/C``` argument, cmd.exe’s help menu states that “for compatibility reasons...```/R``` is the same as ```/C```.” So ```cmd/Ccalc``` is the same as ```cmd/Rcalc```.<br>
+
 Another anchor character term in many of the payload encoding techniques is the ```/V:ON``` argument for enabling delayed environment variable expansion. However, it too is subject to several pitfalls:
 * Whitespace is not required before or after the ```/V:ON``` argument: ```cmd/V:ON/Ccalc```
 * Caret characters can break up the argument: ```cmd^/^V^:^O^N^/Ccalc```   
