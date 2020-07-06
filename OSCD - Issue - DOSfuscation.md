@@ -54,5 +54,25 @@ Some basic building block concepts for each of the four encoding techniques are 
    cmd /c “set com3= /ano&&set com2=stat&&set com1=net&& call set final=%com1%%com2%%com3%&&call%final%”
    ```
    * Multiple adjacent environment variables for concatenation reassembly
+   ``` cmd
+   cmd /c “set com3= /ano&&set com2=stat&&set com1=net&& call set final=%com1%%com2%%com3%&&call %final%”
+   ```
+   
 * FORcoding
    * Set command + for loop syntax + variable substring syntax like  ```!var:~%A,1!``` + ```if``` statement + ```callcommand``` + variable substring syntax like ```%var:~7%```, ```%var:~-12%``` or ```!var:~%A,1!```
+   ``` cmd
+   cmd /V:ON /C “set unique=nets/ao&&FOR %AIN (0 1 2 3 2 6 2 4 5 6 0 7 1337) DO set final=!final!!unique:~%A,1!&&IF %A==1337 CALL %final:~-12%”
+   ```
+   
+* Reversal
+   * Similar to #2 (FORcoding) but can include the for loop’s ```/L``` argument + start/increment/end integers
+   ```cmd
+   cmd /V:ON /C “set reverse=ona/ tatsten&& FOR /L %AIN (11 -1 0) DO set final=!final!!reverse:~%A,1!&&IF %A==0 CALL %final:~-12%”
+   ```
+   
+* FINcoding
+   * Numerous set commands + multiple string substitutions like ```%var:Z=t%``` or ```!var:e=7!``` or string removals like ```%var:@=%```
+   ```cmd
+   cmd /V:ON /C “set command=neZsZ7Z /7no&&  set sub2=!command:7=a!&&set sub1=!sub2:Z=t!&&CALL %sub1%”
+   ```
+The above building block suggestions are extremely basic and should merely serve as a starting point for detection development. However, this should begin reducing the amount of data returned from initial searches. In the case of small environments there may not be much noise at all to filter out. However, in other environments there might be one of many enterprise applications that legitimately uses for loops, variable substrings and concatenated strings on the command line in high quantities. In these environments multiple iterations and layers of detection tuning may be required.
