@@ -45,4 +45,14 @@ level: high
 ```
 
 ## The Approach
+There are numerous building blocks that must be combined to perform the advanced payload encoding techniques. Searching for these building blocks in process arguments, common persistence locations and in file repositories is a good first step in reducing the data set when building robust detections for DOSfuscation in general. We're going to use Sigma so we will look for those building blocks in command-line events (WEL Security Event ID 4688 and Sysmon Event ID 1).
 
+Some basic building block concepts for each of the four encoding techniques are outlined below:
+* Concatenation
+   * Numerous set commands + logical operators & or && + call command 
+   ```cmd
+   cmd /c “set com3= /ano&&set com2=stat&&set com1=net&& call set final=%com1%%com2%%com3%&&call%final%”
+   ```
+   * Multiple adjacent environment variables for concatenation reassembly
+* FORcoding
+   * Set command + for loop syntax + variable substring syntax like  ```!var:~%A,1!``` + ```if``` statement + ```callcommand``` + variable substring syntax like ```%var:~7%```, ```%var:~-12%``` or ```!var:~%A,1!```
