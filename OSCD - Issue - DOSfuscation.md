@@ -15,7 +15,7 @@ There is only one Sigma rule that is focusing on cmd.exe commandline obfuscation
 
 ## Solution
 
-We developed a table with pre-generated CMD commands, obfuscated by the [Invoke-DOSfuscation](https://github.com/danielbohannon/Invoke-DOSfuscation) framework, you can pick up some of the tasks in that table and develop Sigma rules for them.<br>
+Daniel Bohannon (@danielhbohannon) provided 1000 sample commands in the [Samples](https://github.com/danielbohannon/Invoke-DOSfuscation/tree/master/Samples) directory of the [Invoke-DOSfuscation](https://github.com/danielbohannon/Invoke-DOSfuscation) repo broken out across each of the four obfuscation functions. You can pick up some of the tasks in that table and develop Sigma rules for them.<br>
 You will need to use [regular expressions](https://github.com/Neo23x0/sigma/wiki/Specification#types) in Sigma rules. Here is a [Sigma rule](https://github.com/Neo23x0/sigma/blob/master/rules/windows/process_creation/win_invoke_obfuscation_obfuscated_iex_commandline.yml) developed by Daniel Bohannon (@danielhbohannon) that utilize regular expressions in Sigma rule:
 ```YAML
 title: Invoke-Obfuscation Obfuscated IEX Invocation
@@ -98,6 +98,9 @@ You can copy all pre-generated obfuscated powershell one-liners from a particula
 ### Case Sensitivity
 
 We consider that we're able to apply all regexes as not case sensitive or that all events are lowercased in a log pipeline before indexing in SIEM/LM system.
+
+### Framework coverage
+For fuzzing and deep exploration of the numerous tuning options for each obfuscation category, it is recommended that the individual functions be used directly outside of the Invoke-DOSfuscation function wrapper.
 
 ## Tasks
 
