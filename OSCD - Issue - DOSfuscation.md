@@ -85,7 +85,7 @@ However in child Process Creation WEL Security Event ID 4688 existing environmen
 ```XML
 - <EventData>
   <Data Name="SubjectUserSid">S-1-5-21-260327305-1582946090-2061753030-500</Data> 
-  <Data Name="SubjectUserName">admin</Data> 
+  <Data Name="SubjectUserName">user</Data> 
   <Data Name="SubjectDomainName">WIN-JHK6BC88K34</Data> 
   <Data Name="SubjectLogonId">0x1cf8c72</Data> 
   <Data Name="NewProcessId">0x10d8</Data> 
