@@ -52,7 +52,7 @@ The framework provides 3 main obfuscation options:
 * ENCODING - Environment variable encoding
 * PAYLOAD - Obfuscated payload via DOSfuscation
 
-### BINARY
+### BINARY 
 #### Environment Variable Substrings
 One way to obfuscate the string PowerShell in this example command:
 ```CMD
