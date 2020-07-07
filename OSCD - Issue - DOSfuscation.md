@@ -129,7 +129,7 @@ As pointed by the author (Daniel Bohannon (@danielhbohannon)) himself, there are
 
 Some basic building block concepts for each of the advanced encoding techniques are outlined below, ```netstat -ano``` is used as an example command:
 * Concatenation
-   * Numerous set commands + logical operators & or && + call command 
+   * Numerous ```set``` commands + logical operators ```&``` or ```&&``` + ```call``` command 
    ```cmd
    cmd /c “set com3= /ano&&set com2=stat&&set com1=net&& call set final=%com1%%com2%%com3%&&call%final%”
    ```
@@ -139,7 +139,7 @@ Some basic building block concepts for each of the advanced encoding techniques 
    ```
    
 * FORcoding
-   * Set command + for loop syntax + variable substring syntax like  ```!var:~%A,1!``` + ```if``` statement + ```callcommand``` + variable substring syntax like ```%var:~7%```, ```%var:~-12%``` or ```!var:~%A,1!```
+   * ```set``` command + for loop syntax + variable substring syntax like  ```!var:~%A,1!``` + ```if``` statement + ```callcommand``` + variable substring syntax like ```%var:~7%```, ```%var:~-12%``` or ```!var:~%A,1!```
    ``` cmd
    cmd /V:ON /C “set unique=nets/ao&&FOR %AIN (0 1 2 3 2 6 2 4 5 6 0 7 1337) DO set final=!final!!unique:~%A,1!&&IF %A==1337 CALL %final:~-12%”
    ```
@@ -151,7 +151,7 @@ Some basic building block concepts for each of the advanced encoding techniques 
    ```
    
 * FINcoding
-   * Numerous set commands + multiple string substitutions like ```%var:Z=t%``` or ```!var:e=7!``` or string removals like ```%var:@=%```
+   * Numerous ```set``` commands + multiple string substitutions like ```%var:Z=t%``` or ```!var:e=7!``` or string removals like ```%var:@=%```
    ```cmd
    cmd /V:ON /C “set command=neZsZ7Z /7no&&  set sub2=!command:7=a!&&set sub1=!sub2:Z=t!&&CALL %sub1%”
    ```
