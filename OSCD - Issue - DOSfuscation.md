@@ -119,7 +119,7 @@ we'll see the following parent-child process creation chain in WEL:
 ```
 So this subtype of binary obfuscation is considered out of scope for this Issue.
 
-Therefor all binary obfuscation is considered out of scope for this Issue.
+Therefore all binary obfuscation is considered out of scope for this Issue.
 
 ### ENCODING
 Substrings of existing environment variables can be used to encode entire batch file contents or select portions of commands. The payload encoding techniques in these samples only affect static detections because these encodings do not remain in the dynamic execution of external commands in the batch files, so they are considered out of scope for this Issue.
