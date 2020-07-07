@@ -127,7 +127,7 @@ Substrings of existing environment variables can be used to encode entire batch 
 ### PAYLOAD
 As pointed by the author (Daniel Bohannon (@danielhbohannon)) himself, there are numerous building blocks that must be combined to perform the advanced payload encoding techniques. Searching for these building blocks in process arguments, common persistence locations and in file repositories is a good first step in reducing the data set when building robust detections for DOSfuscation in general. We're going to use Sigma so we'll be looking for those building blocks in command-line events (WEL Security Event ID 4688 and Sysmon Event ID 1).
 
-Some basic building block concepts for each of the advanced encoding techniques are outlined below:
+Some basic building block concepts for each of the advanced encoding techniques are outlined below, ```netstat -ano``` is used as an example command:
 * Concatenation
    * Numerous set commands + logical operators & or && + call command 
    ```cmd
