@@ -182,8 +182,20 @@ We consider that we're able to apply all regexes as not case sensitive or that a
 For fuzzing and deep exploration of the numerous tuning options for each obfuscation category, it is recommended that the individual functions be used directly outside of the Invoke-DOSfuscation function wrapper.
 
 ## Tasks
+The author of the framework Daniel Bohannon (@danielhbohannon) provided 1000 sample commands in the [Samples](https://github.com/danielbohannon/Invoke-DOSfuscation/tree/master/Samples) directory of the [Invoke-DOSfuscation](https://github.com/danielbohannon/Invoke-DOSfuscation) repo broken out across each of the four advanced payload obfuscation functions (Concatenation, FORcoding, Reversal and FINcoding).
 
+<table style="word-break: keep-all;">
+ <tr>
+  <th align="center">Task #</th>
+  <th align="center">Option</th>
+  <th align="center">Results</th>
+  <th align="center">Comments</th>
+ </tr>
+ <tr>
+  <td align="center">1</td>
+  <td align="center" nowrap>Concatenation</td>
+  <td nowrap>
 
-
-
-Daniel Bohannon (@danielhbohannon) provided 1000 sample commands in the [Samples](https://github.com/danielbohannon/Invoke-DOSfuscation/tree/master/Samples) directory of the [Invoke-DOSfuscation](https://github.com/danielbohannon/Invoke-DOSfuscation) repo broken out across each of the four advanced payload obfuscation functions. 
+  </td>
+  <td align="left">All of the 1000 examples must be covered.</td>
+ </tr>
