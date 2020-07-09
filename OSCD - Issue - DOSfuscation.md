@@ -52,7 +52,7 @@ The framework provides 3 main obfuscation options:
 * [ENCODING](https://github.com/zinint/OSCD_Invoke-DOSfuscation/blob/master/OSCD%20-%20Issue%20-%20DOSfuscation.md#encoding) - Environment variable encoding
 * [PAYLOAD](https://github.com/zinint/OSCD_Invoke-DOSfuscation/blob/master/OSCD%20-%20Issue%20-%20DOSfuscation.md#payload) - Obfuscated payload via DOSfuscation
 
-### BINARY (Environment Variable Substrings and For Loop)
+### BINARY
 #### Environment Variable Substrings
 One way to obfuscate the string PowerShell in this example command:
 ```CMD
