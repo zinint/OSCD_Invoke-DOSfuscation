@@ -16,7 +16,7 @@ There is only one Sigma rule that is focusing on cmd.exe commandline obfuscation
 ## Solution
 
 We developed a table with pre-generated CMD commands, obfuscated by the [Invoke-DOSfuscation](https://github.com/danielbohannon/Invoke-DOSfuscation) framework, you can pick up some of the tasks in that table and develop Sigma rules for them.<br>
-You will need to use [regular expressions](https://github.com/Neo23x0/sigma/wiki/Specification#types) in Sigma rules. Here is a [Sigma rule](https://github.com/Neo23x0/sigma/blob/master/rules/windows/process_creation/win_invoke_obfuscation_obfuscated_iex_commandline.yml) developed by Daniel Bohannon (@danielhbohannon) that utilize regular expressions in Sigma rule:
+You will need to use [regular expressions](https://github.com/Neo23x0/sigma/wiki/Specification#types) in Sigma rules. Here is a [Sigma rule](https://github.com/Neo23x0/sigma/blob/master/rules/windows/process_creation/win_invoke_obfuscation_obfuscated_iex_commandline.yml) developed by Daniel Bohannon ([@danielhbohannon](https://twitter.com/danielhbohannon)) that utilize regular expressions in Sigma rule:
 ```YAML
 title: Invoke-Obfuscation Obfuscated IEX Invocation
 id: 4bf943c6-5146-4273-98dd-e958fd1e3abf
@@ -99,7 +99,7 @@ Therefore all binary obfuscation is considered out of scope for this Issue.
 Substrings of existing environment variables can be used to encode entire batch file contents or select portions of commands. These payload encoding techniques only affect static detections because these encodings do not remain in the dynamic execution of external commands in the batch files, so they are considered out of scope for this Issue.
 
 ### PAYLOAD
-As pointed by the author (Daniel Bohannon (@danielhbohannon)) himself, there are numerous building blocks that must be combined to perform the advanced payload encoding techniques. Searching for these building blocks in process arguments, common persistence locations and in file repositories is a good first step in reducing the data set when building robust detections for DOSfuscation in general. We're going to use Sigma so we'll be looking for those building blocks in command-line events (WEL Security Event ID 4688 and Sysmon Event ID 1).
+As pointed by the author (Daniel Bohannon ([@danielhbohannon](https://twitter.com/danielhbohannon))) himself, there are numerous building blocks that must be combined to perform the advanced payload encoding techniques. Searching for these building blocks in process arguments, common persistence locations and in file repositories is a good first step in reducing the data set when building robust detections for DOSfuscation in general. We're going to use Sigma so we'll be looking for those building blocks in command-line events (WEL Security Event ID 4688 and Sysmon Event ID 1).
 
 Some basic building block concepts for each of the advanced encoding techniques are outlined below, ```netstat -ano``` is used as an example command:
 * Concatenation
@@ -152,7 +152,7 @@ We consider that we're able to apply all regexes as not case sensitive or that a
 For fuzzing and deep exploration of the numerous tuning options for each obfuscation category, it is recommended that the individual functions be used directly outside of the Invoke-DOSfuscation function wrapper.
 
 ## Tasks
-The author of the framework Daniel Bohannon (@danielhbohannon) provided 1000 sample commands in the [Samples](https://github.com/danielbohannon/Invoke-DOSfuscation/tree/master/Samples) directory of the [Invoke-DOSfuscation](https://github.com/danielbohannon/Invoke-DOSfuscation) repo broken out across each of the four advanced payload obfuscation functions (Concatenation, FORcoding, Reversal and FINcoding).
+The author of the framework Daniel Bohannon ([@danielhbohannon](https://twitter.com/danielhbohannon)) provided 1000 sample commands in the [Samples](https://github.com/danielbohannon/Invoke-DOSfuscation/tree/master/Samples) directory of the [Invoke-DOSfuscation](https://github.com/danielbohannon/Invoke-DOSfuscation) repo broken out across each of the four advanced payload obfuscation functions (Concatenation, FORcoding, Reversal and FINcoding).
 
 <table style="word-break: keep-all;">
  <tr>
