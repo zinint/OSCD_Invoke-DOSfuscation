@@ -48,9 +48,9 @@ level: high
 ## The Approach
 
 The framework provides 3 main obfuscation options:
-* BINARY - Obfuscated binary syntax for cmd.exe & powershell.exe
-* ENCODING - Environment variable encoding
-* PAYLOAD - Obfuscated payload via DOSfuscation
+* [BINARY](https://github.com/zinint/OSCD_Invoke-DOSfuscation/blob/master/OSCD%20-%20Issue%20-%20DOSfuscation.md#binary-environment-variable-substrings-and-for-loop) - Obfuscated binary syntax for cmd.exe & powershell.exe
+* [ENCODING](https://github.com/zinint/OSCD_Invoke-DOSfuscation/blob/master/OSCD%20-%20Issue%20-%20DOSfuscation.md#encoding) - Environment variable encoding
+* [PAYLOAD](https://github.com/zinint/OSCD_Invoke-DOSfuscation/blob/master/OSCD%20-%20Issue%20-%20DOSfuscation.md#payload) - Obfuscated payload via DOSfuscation
 
 ### BINARY (Environment Variable Substrings and For Loop)
 #### Environment Variable Substrings
