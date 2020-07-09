@@ -194,8 +194,6 @@ The author of the framework Daniel Bohannon (@danielhbohannon) provided 1000 sam
  <tr>
   <td align="center">1</td>
   <td align="center" nowrap>Concatenation</td>
-  <td nowrap>
-
-  </td>
+  <td><a href="https://github.com/danielbohannon/Invoke-DOSfuscation/blob/master/Samples/STATIC_1-of-4_Out-DosConcatenatedCommand.txt">Examples</a></td>
   <td align="left">All of the 1000 examples must be covered.</td>
  </tr>
