@@ -197,3 +197,21 @@ The author of the framework Daniel Bohannon (@danielhbohannon) provided 1000 sam
   <td><a href="https://github.com/danielbohannon/Invoke-DOSfuscation/blob/master/Samples/STATIC_1-of-4_Out-DosConcatenatedCommand.txt">Examples</a></td>
   <td align="left">All of the 1000 examples must be covered.</td>
  </tr>
+ <tr>
+  <td align="center">2</td>
+  <td align="center" nowrap>FORcoding</td>
+  <td><a href="https://github.com/danielbohannon/Invoke-DOSfuscation/blob/master/Samples/STATIC_3-of-4_Out-DosFORcodedCommand.txt">Examples</a></td>
+  <td align="left">All of the 1000 examples must be covered.</td>
+ </tr>
+ <tr>
+  <td align="center">3</td>
+  <td align="center" nowrap>Reversal</td>
+  <td><a href="https://github.com/danielbohannon/Invoke-DOSfuscation/blob/master/Samples/STATIC_2-of-4_Out-DosReversedCommand.txt">Examples</a></td>
+  <td align="left">All of the 1000 examples must be covered.</td>
+ </tr>
+ <tr>
+  <td align="center">4</td>
+  <td align="center" nowrap>FINcoding</td>
+  <td><a href="https://github.com/danielbohannon/Invoke-DOSfuscation/blob/master/Samples/STATIC_4-of-4_Out-DosFINcodedCommand.txt">Examples</a></td>
+  <td align="left">All of the 1000 examples must be covered.</td>
+ </tr>
