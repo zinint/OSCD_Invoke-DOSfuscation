@@ -233,7 +233,7 @@ Import-Module .\Invoke-DOSfuscation.psd1
 
 3. Run the Invoke-DosTestHarness using the ```-Functions``` argument to specify which obfuscation function you chose. </br> E.g. if you chose the Task #1 run the following command:
 ```powershell
-InvokeDosTestHarness -Functions @('Out-DosConcatenatedCommand')
+Invoke-DosTestHarness -Functions @('Out-DosConcatenatedCommand')
 ```
 
 4. Develop your regexes, add them in the ```$regexDetectionTerms``` array in this [this code block](https://github.com/danielbohannon/Invoke-DOSfuscation/blob/master/Invoke-DOSfuscationTestHarness.psm1#L293-L296) like that:
