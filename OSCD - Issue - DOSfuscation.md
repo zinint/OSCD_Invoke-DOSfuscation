@@ -227,7 +227,7 @@ If you would like to assign yourself to some of the tasks listed above, you shou
 Import-Module .\Invoke-DOSfuscation.psd1
 ```
 
-3. Run the Invoke-DosTestHarness using the ```-Functions``` argument to specify which obfuscation function you chose, e.g. you chose the Task #1:
+3. Run the Invoke-DosTestHarness using the ```-Functions``` argument to specify which obfuscation function you chose. </br> E.g. you chose the Task #1:
 ```powershell
 InvokeDosTestHarness -Functions @('Out-DosConcatenatedCommand')
 ```
