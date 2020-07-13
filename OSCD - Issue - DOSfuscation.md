@@ -1,3 +1,9 @@
+# Issue Contents
+* [Summary](https://github.com/zinint/OSCD_Invoke-DOSfuscation/blob/master/OSCD%20-%20Issue%20-%20DOSfuscation.md#summary)
+* [Problem](https://github.com/zinint/OSCD_Invoke-DOSfuscation/blob/master/OSCD%20-%20Issue%20-%20DOSfuscation.md#problem)
+* [Solution](https://github.com/zinint/OSCD_Invoke-DOSfuscation/blob/master/OSCD%20-%20Issue%20-%20DOSfuscation.md#solution)
+* [The Approach to Solution](https://github.com/zinint/OSCD_Invoke-DOSfuscation/blob/master/OSCD%20-%20Issue%20-%20DOSfuscation.md#summart)
+
 ## Summary
 
 - Tool: Invoke-DOSfuscation — cmd.exe command obfuscation framework
