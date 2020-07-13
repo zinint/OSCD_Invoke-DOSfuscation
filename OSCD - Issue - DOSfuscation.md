@@ -234,8 +234,9 @@ Import-Module .\Invoke-DOSfuscation.psd1
 ```powershell
 Invoke-DosTestHarness -Functions @('Out-DosConcatenatedCommand')
 ```
-check the ```UNDETECTED_COMMANDS.txt```.
-4. Develop your regexes, add them in the ```$regexDetectionTerms``` array in [this code block](https://github.com/danielbohannon/Invoke-DOSfuscation/blob/master/Invoke-DOSfuscationTestHarness.psm1#L293-L296) like that:
+check the ```UNDETECTED_COMMANDS.txt```.</br>
+
+ 4. Develop your regexes, add them in the ```$regexDetectionTerms``` array in [this code block](https://github.com/danielbohannon/Invoke-DOSfuscation/blob/master/Invoke-DOSfuscationTestHarness.psm1#L293-L296) like that:
 ![example1](https://i.ibb.co/Px4DqKk/image.png)
 
 5. Rerun the ```Invoke-DosTestHarness```, check the ```UNDETECTED_COMMANDS.txt``` again and repeat the process until all of the obfuscation function's examples are covered 1 or even more times, like this for example:
