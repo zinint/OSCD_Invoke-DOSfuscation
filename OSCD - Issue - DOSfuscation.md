@@ -161,10 +161,10 @@ We consider that we're able to apply all regexes as not case sensitive or that a
 ### Framework coverage
 For fuzzing and deep exploration of the numerous tuning options for each obfuscation category, it is recommended that the individual functions be used directly outside of the Invoke-DOSfuscation function wrapper.
 
-## Tasks
+## Framework's Test Harness Module
 The author of the framework Daniel Bohannon ([@danielhbohannon](https://twitter.com/danielhbohannon)) provided a separate [Test Harness Module](https://github.com/danielbohannon/Invoke-DOSfuscation/blob/master/Invoke-DOSfuscationTestHarness.psm1). All functions in this module are solely for the test harness functionality for Invoke-DOSfuscation and do not provide any additional obfuscation functionality. This test harness is meant to enable defenders to easily define and test regex-based detection ideas for command line values of obfuscated commands produced by Invoke-DOSfuscation. In addition, this harness returns PSCustomObjects containing all user-defined detection information to help identify payloads that are undetected or only have 1-2 detection matches.
 
-### HowTo
+## How To Use [Test Harness Module](https://github.com/danielbohannon/Invoke-DOSfuscation/blob/master/Invoke-DOSfuscationTestHarness.psm1).
 1. Install [Invoke-DOSfuscation](https://github.com/danielbohannon/Invoke-DOSfuscation#installation).
 2. Open the ```Invoke-DOSfuscationTestHarness.psm1``` in a text editor of your choice.<br>
 2.1. Find [this code block](https://github.com/danielbohannon/Invoke-DOSfuscation/blob/master/Invoke-DOSfuscationTestHarness.psm1#L293-L296) with the ```$regexDetectionTerms``` array. Daniel Bohannon ([@danielhbohannon](https://twitter.com/danielhbohannon)) already included a couple sample detection rules in the ```$regexDetectionTerms``` array:
@@ -188,6 +188,12 @@ this function checks an input command (string) against all regex detection value
 5. As a result two files will be generated in the frameworks folder:
 * ```FAILED_COMMANDS.txt``` - conatains failed commands.
 * ```UNDETECTED_COMMANDS.txt``` - contains undetected commands.
+
+## How To Work with Tasks
+6. Choose the obfuscation function which you are going to work on from this table:
+
+
+
 6. Develop your regexes, add them in the ```$regexDetectionTerms``` array in this [this code block](https://github.com/danielbohannon/Invoke-DOSfuscation/blob/master/Invoke-DOSfuscationTestHarness.psm1#L293-L296) like that:
 ![example1](https://i.ibb.co/Px4DqKk/image.png)
 7. Rerun the test and see whats left, keep trying...
