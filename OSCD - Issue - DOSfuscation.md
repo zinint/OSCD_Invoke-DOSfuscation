@@ -7,7 +7,6 @@
    * [Framework option #2 - ENCODING](https://github.com/zinint/OSCD_Invoke-DOSfuscation/blob/master/OSCD%20-%20Issue%20-%20DOSfuscation.md#encoding)
    * [Framework option #3 - PAYLOAD](https://github.com/zinint/OSCD_Invoke-DOSfuscation/blob/master/OSCD%20-%20Issue%20-%20DOSfuscation.md#payload)
 * [Case Sensitivity Issue](https://github.com/zinint/OSCD_Invoke-DOSfuscation/blob/master/OSCD%20-%20Issue%20-%20DOSfuscation.md#case-sensitivity)
-* [Tasks and How To](https://github.com/zinint/OSCD_Invoke-DOSfuscation/blob/master/OSCD%20-%20Issue%20-%20DOSfuscation.md#tasks)
 * [Framework's Test Harness Module](https://github.com/zinint/OSCD_Invoke-DOSfuscation/blob/master/OSCD%20-%20Issue%20-%20DOSfuscation.md#frameworks-test-harness-module)
 * [How to Use Test Harness Module](https://github.com/zinint/OSCD_Invoke-DOSfuscation/blob/master/OSCD%20-%20Issue%20-%20DOSfuscation.md#how-to-use-test-harness-module)
 * [How to Work with Tasks](https://github.com/zinint/OSCD_Invoke-DOSfuscation/blob/master/OSCD%20-%20Issue%20-%20DOSfuscation.md#how-to-work-with-tasks)
@@ -220,6 +219,7 @@ this function checks an input command (string) against all regex detection value
   <td align="center" nowrap>Out-DosFINcodedCommand</td>
   <td><a href="https://github.com/danielbohannon/Invoke-DOSfuscation/blob/master/Samples/STATIC_4-of-4_Out-DosFINcodedCommand.txt">Examples</a></td>
  </tr>
+</table>  
 If you would like to assign yourself to some of the tasks listed above, you should comment on the Issue with a specific Task you are going to solve. This way, the other participants will see that you will work on a particular task so they will do something else and not intersect with you. 
 
 2. Import the module:
@@ -235,4 +235,4 @@ InvokeDosTestHarness -Functions @('Out-DosConcatenatedCommand')
 4. Develop your regexes, add them in the ```$regexDetectionTerms``` array in this [this code block](https://github.com/danielbohannon/Invoke-DOSfuscation/blob/master/Invoke-DOSfuscationTestHarness.psm1#L293-L296) like that:
 ![example1](https://i.ibb.co/Px4DqKk/image.png)
 
-5. Rerun the Invoke-DosTestHarness and repeat the process until all of the obfuscation functions examples are covered.
+5. Rerun the Invoke-DosTestHarness and repeat the process until all of the obfuscation function's examples are covered.
