@@ -241,4 +241,4 @@ Invoke-DosTestHarness -Functions @('Out-DosConcatenatedCommand')
 
 5. Rerun the Invoke-DosTestHarness and repeat the process until all of the obfuscation function's examples are covered 1 or more times.
 
-6. Comment on the Issue with a specific Task you've solved and include your regexes. After we all assure that the suggested solution is correct, create a Sigma rule and a pull request to the OSCD's branch of the Sigma Repository.
+6. Comment on the Issue with a specific Task you've solved and include your regexes. After we all assure that the suggested solution is correct, create a Sigma rule and a pull request to the OSCD's Branch of the [Sigma Repository](https://github.com/Neo23x0/sigma/).
