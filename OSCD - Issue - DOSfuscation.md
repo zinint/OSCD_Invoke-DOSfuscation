@@ -186,7 +186,7 @@ this command generates (with default argument settings) over 1000 randomly-obfus
 ```powershell
 Get-DosDetectionMatch
 ```
-this function checks an input command (string) against all regex detection values input into the ```$regexDetectionTerms``` array in the function. This is automatically called by ```Invoke-DosTestHarness``` but can be called in a stand-alone fashion as well.</br>
+this function checks an input command (string) against all regex detection values input into the ```$regexDetectionTerms``` array in the function. This is automatically called by ```Invoke-DosTestHarness``` but can be called in a stand-alone fashion as well.</br></br>
 5. You will see the results at the end in a table like this:
 ![example2]()
 
