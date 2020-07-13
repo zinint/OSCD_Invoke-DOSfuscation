@@ -236,9 +236,9 @@ Import-Module .\Invoke-DOSfuscation.psd1
 Invoke-DosTestHarness -Functions @('Out-DosConcatenatedCommand')
 ```
 
-4. Develop your regexes, add them in the ```$regexDetectionTerms``` array in this [this code block](https://github.com/danielbohannon/Invoke-DOSfuscation/blob/master/Invoke-DOSfuscationTestHarness.psm1#L293-L296) like that:
+4. Develop your regexes, add them in the ```$regexDetectionTerms``` array in [this code block](https://github.com/danielbohannon/Invoke-DOSfuscation/blob/master/Invoke-DOSfuscationTestHarness.psm1#L293-L296) like that:
 ![example1](https://i.ibb.co/Px4DqKk/image.png)
 
-5. Rerun the Invoke-DosTestHarness and repeat the process until all of the obfuscation function's examples are covered.
+5. Rerun the Invoke-DosTestHarness and repeat the process until all of the obfuscation function's examples are covered 1 or more times.
 
 6. Comment on the Issue with a specific Task you've solved and include your regexes. After we all assure that the suggested solution is correct, create a Sigma rule and a pull request to the OSCD's branch of the Sigma Repository.
