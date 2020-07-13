@@ -231,7 +231,7 @@ If you would like to assign yourself to some of the tasks listed above, you shou
 Import-Module .\Invoke-DOSfuscation.psd1
 ```
 
-3. Run the Invoke-DosTestHarness using the ```-Functions``` argument to specify which obfuscation function you chose. </br> E.g. if you chose the Task #1 run the following command:
+3. Run the ```Invoke-DosTestHarness``` using the ```-Functions``` argument to specify which obfuscation function you chose. </br> E.g. if you chose the Task #1 run the following command:
 ```powershell
 Invoke-DosTestHarness -Functions @('Out-DosConcatenatedCommand')
 ```
@@ -239,6 +239,6 @@ Invoke-DosTestHarness -Functions @('Out-DosConcatenatedCommand')
 4. Develop your regexes, add them in the ```$regexDetectionTerms``` array in [this code block](https://github.com/danielbohannon/Invoke-DOSfuscation/blob/master/Invoke-DOSfuscationTestHarness.psm1#L293-L296) like that:
 ![example1](https://i.ibb.co/Px4DqKk/image.png)
 
-5. Rerun the Invoke-DosTestHarness and repeat the process until all of the obfuscation function's examples are covered 1 or more times.
+5. Rerun the ```Invoke-DosTestHarness``` and repeat the process until all of the obfuscation function's examples are covered 1 or more times.
 
 6. Comment on the Issue with a specific Task you've solved and include your regexes. After we all assure that the suggested solution is correct, create a Sigma rule and a pull request to the OSCD's Branch of the [Sigma Repository](https://github.com/Neo23x0/sigma/).
