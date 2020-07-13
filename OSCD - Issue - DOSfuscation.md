@@ -28,8 +28,8 @@ There is only one Sigma rule that is focusing on cmd.exe commandline obfuscation
 
 ## Solution
 
-We developed a table with pre-generated CMD commands, obfuscated by the [Invoke-DOSfuscation](https://github.com/danielbohannon/Invoke-DOSfuscation) framework, you can pick up some of the tasks in that table and develop Sigma rules for them.<br>
-You will need to use [regular expressions](https://github.com/Neo23x0/sigma/wiki/Specification#types) in Sigma rules. Here is a [Sigma rule](https://github.com/Neo23x0/sigma/blob/master/rules/windows/process_creation/win_invoke_obfuscation_obfuscated_iex_commandline.yml) developed by Daniel Bohannon ([@danielhbohannon](https://twitter.com/danielhbohannon)) that utilize regular expressions in Sigma rule:
+We developed a table with Tasks for detecting CMD commands obfuscated by the [Invoke-DOSfuscation](https://github.com/danielbohannon/Invoke-DOSfuscation) framework, you can pick up some of the Tasks in that table and develop Sigma rules for them.<br>
+You will need to use [regular expression value modifier](https://github.com/Neo23x0/sigma/wiki/Specification#types), provided by Sigma converter (sigmac). Here is an example of [Sigma rule](https://github.com/Neo23x0/sigma/blob/oscd/rules/windows/process_creation/win_invoke_obfuscation_obfuscated_iex_commandline.yml) developed by Daniel Bohannon ([@danielhbohannon](https://twitter.com/danielhbohannon)) that utilizes a regular expression value modifier (`|re`):
 ```YAML
 title: Invoke-Obfuscation Obfuscated IEX Invocation
 id: 4bf943c6-5146-4273-98dd-e958fd1e3abf
@@ -240,3 +240,5 @@ Invoke-DosTestHarness -Functions @('Out-DosConcatenatedCommand')
 ![example1](https://i.ibb.co/Px4DqKk/image.png)
 
 5. Rerun the Invoke-DosTestHarness and repeat the process until all of the obfuscation function's examples are covered.
+
+6. Comment on the Issue with a specific Task you've solved and include your regexes. After we all assure that the suggested solution is correct, create a Sigma rule and a pull request to the OSCD's branch of the Sigma Repository.
