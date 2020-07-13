@@ -166,7 +166,7 @@ The author of the framework Daniel Bohannon ([@danielhbohannon](https://twitter.
 
 ### HowTo
 1. Install [Invoke-DOSfuscation](https://github.com/danielbohannon/Invoke-DOSfuscation#installation).
-2. Open the ```Invoke-DOSfuscationTestHarness.psm1``` in a text editor of your choice.</b>
+2. Open the ```Invoke-DOSfuscationTestHarness.psm1``` in a text editor of your choice.<br>
 2.1. Find [this code block](https://github.com/danielbohannon/Invoke-DOSfuscation/blob/master/Invoke-DOSfuscationTestHarness.psm1#L293-L296) with the ```$regexDetectionTerms``` array. Daniel Bohannon ([@danielhbohannon](https://twitter.com/danielhbohannon)) already included a couple sample detection rules in the ```$regexDetectionTerms``` array in Invoke-DOSfuscationTestHarness.psm1:
 ```
 Name = 'UnobfuscatedForLoop'  ; Expression = 'FOR\s+\/[A-Z]\s+\%[A-Z]\s+IN.*DO\s'
