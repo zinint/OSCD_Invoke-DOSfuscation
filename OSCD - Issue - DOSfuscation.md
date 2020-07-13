@@ -239,7 +239,7 @@ check the ```UNDETECTED_COMMANDS.txt```.</br>
  4. Develop your regexes, add them in the ```$regexDetectionTerms``` array in [this code block](https://github.com/danielbohannon/Invoke-DOSfuscation/blob/master/Invoke-DOSfuscationTestHarness.psm1#L293-L296) like that:
 ![example1](https://i.ibb.co/Px4DqKk/image.png)
 
-5. Rerun the ```Invoke-DosTestHarness```, check the ```UNDETECTED_COMMANDS.txt``` again and repeat the process until all of the obfuscation function's examples are covered 1 or even more times, like this for example:
+5. ReImport the Module, rerun the ```Invoke-DosTestHarness```, check the ```UNDETECTED_COMMANDS.txt``` again and repeat the whole process until all of the obfuscation function's examples are covered 1 or even more times, like this for example:
 ![Example3]()
 
 6. Comment on the Issue with a specific Task you've solved and include your regexes. After we all assure that the suggested solution is correct, create a Sigma rule and a pull request to the OSCD's Branch of the [Sigma Repository](https://github.com/Neo23x0/sigma/).
