@@ -189,7 +189,7 @@ Get-DosDetectionMatch
 this function checks an input command (string) against all regex detection values input into the ```$regexDetectionTerms``` array in the function. This is automatically called by ```Invoke-DosTestHarness``` but can be called in a stand-alone fashion as well.
 
  5. You will see the results at the end in a table like this:
-![example2](https://i.ibb.co/wpKC7w0/image.png)
+![example2](https://i.ibb.co/wpKC7w0/image.png)</br>
 also two files will be generated in the framework's folder (framework automatically detects the correct path):
 * ```FAILED_COMMANDS.txt``` - contains failed commands;
 * ```UNDETECTED_COMMANDS.txt``` - contains undetected commands.
