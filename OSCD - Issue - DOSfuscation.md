@@ -192,7 +192,7 @@ this function checks an input command (string) against all regex detection value
 ![example2]()
 
 also two files will be generated in the framework's folder (framework automatically detects the correct path):
-* ```FAILED_COMMANDS.txt``` - conatains failed commands;
+* ```FAILED_COMMANDS.txt``` - contains failed commands;
 * ```UNDETECTED_COMMANDS.txt``` - contains undetected commands.
 
 ## How To Work with Tasks
