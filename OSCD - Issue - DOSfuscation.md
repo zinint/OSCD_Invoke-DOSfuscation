@@ -223,7 +223,7 @@ also two files will be generated in the framework's folder (framework automatica
   <td align="center"><a href="https://github.com/danielbohannon/Invoke-DOSfuscation/blob/master/Samples/STATIC_4-of-4_Out-DosFINcodedCommand.txt">Examples</a></td>
  </tr>
 </table>  
-If you would like to assign yourself to some of the tasks listed above, you should comment on the Issue with a specific Task you are going to solve. This way, the other participants will see that you will work on a particular task so they will do something else and not intersect with you. 
+If you would like to assign yourself to some of the tasks listed above, you should comment on the Issue with a specific Task you are going to solve. This way, the other participants will see that you will work on a particular task so they will do something else and not intersect with you. </br>
 
 2. Import the module:
 ```powershell
