@@ -14,7 +14,7 @@
 ## Summary
 
 - Tool: Invoke-DOSfuscation — cmd.exe command obfuscation framework
-- Author: Daniel Bohannon, @danielhbohannon
+- Author: Daniel Bohannon ([@danielhbohannon](https://twitter.com/danielhbohannon))
 - Type: Offensive tool, threat simulation
 - Materials:
     * Presentation from Black Hat Asia 2018 [Techniques FOR %F IN (-style) DO (S-level CMD Obfuscation)](https://i.blackhat.com/briefings/asia/2018/asia-18-bohannon-invoke_dosfuscation_techniques_for_fin_style_dos_level_cmd_obfuscation.pdf) and the talk on Black Hat Asia 2018 on [YouTube](https://www.youtube.com/watch?v=mej5L9PE1fs)
