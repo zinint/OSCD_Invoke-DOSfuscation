@@ -206,13 +206,13 @@ this function checks an input command (string) against all regex detection value
  </tr>
  <tr>
   <td align="center">2</td>
-  <td align="center" nowrap>Out-DosFORcodedCommand</td>
-  <td align="center"><a href="https://github.com/danielbohannon/Invoke-DOSfuscation/blob/master/Samples/STATIC_3-of-4_Out-DosFORcodedCommand.txt">Examples</a></td>
+  <td align="center" nowrap>Out-DosReversedCommand</td>
+  <td align="center"><a href="https://github.com/danielbohannon/Invoke-DOSfuscation/blob/master/Samples/STATIC_2-of-4_Out-DosReversedCommand.txt">Examples</a></td>
  </tr>
  <tr>
   <td align="center">3</td>
-  <td align="center" nowrap>Out-DosReversedCommand</td>
-  <td align="center"><a href="https://github.com/danielbohannon/Invoke-DOSfuscation/blob/master/Samples/STATIC_2-of-4_Out-DosReversedCommand.txt">Examples</a></td>
+  <td align="center" nowrap>Out-DosFORcodedCommand</td>
+  <td align="center"><a href="https://github.com/danielbohannon/Invoke-DOSfuscation/blob/master/Samples/STATIC_3-of-4_Out-DosFORcodedCommand.txt">Examples</a></td>
  </tr>
  <tr>
   <td align="center">4</td>
