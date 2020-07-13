@@ -151,36 +151,14 @@ We consider that we're able to apply all regexes as not case sensitive or that a
 For fuzzing and deep exploration of the numerous tuning options for each obfuscation category, it is recommended that the individual functions be used directly outside of the Invoke-DOSfuscation function wrapper.
 
 ## Tasks
-The author of the framework Daniel Bohannon ([@danielhbohannon](https://twitter.com/danielhbohannon)) provided 1000 sample commands in the [Samples](https://github.com/danielbohannon/Invoke-DOSfuscation/tree/master/Samples) directory of the [Invoke-DOSfuscation](https://github.com/danielbohannon/Invoke-DOSfuscation) repo broken out across each of the four advanced payload obfuscation functions (Concatenation, FORcoding, Reversal and FINcoding).
+The author of the framework Daniel Bohannon ([@danielhbohannon](https://twitter.com/danielhbohannon)) provided a separate [Test Harness Module](https://github.com/danielbohannon/Invoke-DOSfuscation/blob/master/Invoke-DOSfuscationTestHarness.psm1). All functions in this module are solely for the test harness functionality for Invoke-DOSfuscation and do not provide any additional obfuscation functionality. This test harness is meant to enable defenders to easily define and test regex-based detection ideas for command line values of obfuscated commands produced by Invoke-DOSfuscation. In addition, this harness returns PSCustomObjects containing all user-defined detection information to help identify payloads that are undetected or only have 1-2 detection matches.
 
-<table style="word-break: keep-all;">
- <tr>
-  <th align="center">Task #</th>
-  <th align="center">Option</th>
-  <th align="center">Results</th>
-  <th align="center">Comments</th>
- </tr>
- <tr>
-  <td align="center">1</td>
-  <td align="center" nowrap>Concatenation</td>
-  <td><a href="https://github.com/danielbohannon/Invoke-DOSfuscation/blob/master/Samples/STATIC_1-of-4_Out-DosConcatenatedCommand.txt">Examples</a></td>
-  <td align="left">All of the 1000 examples must be covered.</td>
- </tr>
- <tr>
-  <td align="center">2</td>
-  <td align="center" nowrap>FORcoding</td>
-  <td><a href="https://github.com/danielbohannon/Invoke-DOSfuscation/blob/master/Samples/STATIC_3-of-4_Out-DosFORcodedCommand.txt">Examples</a></td>
-  <td align="left">All of the 1000 examples must be covered.</td>
- </tr>
- <tr>
-  <td align="center">3</td>
-  <td align="center" nowrap>Reversal</td>
-  <td><a href="https://github.com/danielbohannon/Invoke-DOSfuscation/blob/master/Samples/STATIC_2-of-4_Out-DosReversedCommand.txt">Examples</a></td>
-  <td align="left">All of the 1000 examples must be covered.</td>
- </tr>
- <tr>
-  <td align="center">4</td>
-  <td align="center" nowrap>FINcoding</td>
-  <td><a href="https://github.com/danielbohannon/Invoke-DOSfuscation/blob/master/Samples/STATIC_4-of-4_Out-DosFINcodedCommand.txt">Examples</a></td>
-  <td align="left">All of the 1000 examples must be covered.</td>
- </tr>
+### HowTo
+1. Install [Invoke-DOSfuscation](https://github.com/danielbohannon/Invoke-DOSfuscation#installation).
+2. Open the Invoke-DOSfuscationTestHarness.psm1 in a text editor of your choice.
+2.1. Find [this code block](https://github.com/danielbohannon/Invoke-DOSfuscation/blob/master/Invoke-DOSfuscationTestHarness.psm1#L293-L296) with the ```$regexDetectionTerms``` array. Daniel Bohannon ([@danielhbohannon](https://twitter.com/danielhbohannon)) already included a couple sample detection rules in the ```$regexDetectionTerms``` array in Invoke-DOSfuscationTestHarness.psm1, but you will want to add and test many more rules as you test the sample obfuscated commands.
+3. Import the module:
+```powershell
+Import-Module .\Invoke-DOSfuscation.psd1
+```
+3. 
