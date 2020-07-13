@@ -155,10 +155,28 @@ The author of the framework Daniel Bohannon ([@danielhbohannon](https://twitter.
 
 ### HowTo
 1. Install [Invoke-DOSfuscation](https://github.com/danielbohannon/Invoke-DOSfuscation#installation).
-2. Open the Invoke-DOSfuscationTestHarness.psm1 in a text editor of your choice.
-2.1. Find [this code block](https://github.com/danielbohannon/Invoke-DOSfuscation/blob/master/Invoke-DOSfuscationTestHarness.psm1#L293-L296) with the ```$regexDetectionTerms``` array. Daniel Bohannon ([@danielhbohannon](https://twitter.com/danielhbohannon)) already included a couple sample detection rules in the ```$regexDetectionTerms``` array in Invoke-DOSfuscationTestHarness.psm1, but you will want to add and test many more rules as you test the sample obfuscated commands.
+2. Open the ```Invoke-DOSfuscationTestHarness.psm1``` in a text editor of your choice.</b>
+2.1. Find [this code block](https://github.com/danielbohannon/Invoke-DOSfuscation/blob/master/Invoke-DOSfuscationTestHarness.psm1#L293-L296) with the ```$regexDetectionTerms``` array. Daniel Bohannon ([@danielhbohannon](https://twitter.com/danielhbohannon)) already included a couple sample detection rules in the ```$regexDetectionTerms``` array in Invoke-DOSfuscationTestHarness.psm1:
+```
+Name = 'UnobfuscatedForLoop'  ; Expression = 'FOR\s+\/[A-Z]\s+\%[A-Z]\s+IN.*DO\s'
+Name = 'MultipleVarSubstring' ; Expression = '\%.{0,25}:~.{0,25}\%.*\%.{0,25}:~.{0,25}\%'
+```
 3. Import the module:
 ```powershell
 Import-Module .\Invoke-DOSfuscation.psd1
 ```
-3. 
+4. To check what we can detect with regexes already included in the ```$regexDetectionTerms``` array by Daniel Bohannon ([@danielhbohannon](https://twitter.com/danielhbohannon)) run the following command:
+```powershell
+Invoke-DosTestHarness
+```
+this command generates (with default argument settings) over 1000 randomly-obfuscated commands from a list of test commands for both payload integrity and detection purposes. Each test harness iteration randomizes all available function arguments and calls the four obfuscation functions directly instead of using the more standardized -ObfuscationLevel values (1-3) that the Invoke-DOSfuscation menu-driven function uses by default. This produces a significantly wider range of obfuscation output against which one can build more thorough detections. Each obfuscated command is then checked against the second function:
+```powershell
+Get-DosDetectionMatch
+```
+this function checks an input command (string) against all regex detection values input into the ```$regexDetectionTerms``` array in the function. This is automatically called by ```Invoke-DosTestHarness``` but can be called in a stand-alone fashion as well.
+5. As a result two files will be generated in the frameworks folder:
+* FAILED_COMMANDS.txt - conatains failed commands.
+* UNDETECTED_COMMANDS.txt - contains undetected commands.
+6. Develop your regexes, add them in the ```$regexDetectionTerms``` array in this [this code block](https://github.com/danielbohannon/Invoke-DOSfuscation/blob/master/Invoke-DOSfuscationTestHarness.psm1#L293-L296) like that:
+![example1](https://i.ibb.co/Px4DqKk/image.png)
+7. Rerun the test and see whats left, keep trying...
