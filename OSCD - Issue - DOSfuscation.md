@@ -189,8 +189,7 @@ Get-DosDetectionMatch
 this function checks an input command (string) against all regex detection values input into the ```$regexDetectionTerms``` array in the function. This is automatically called by ```Invoke-DosTestHarness``` but can be called in a stand-alone fashion as well.
 
  5. You will see the results at the end in a table like this:
-![example2]()
-
+![example2](https://i.ibb.co/wpKC7w0/image.png)
 also two files will be generated in the framework's folder (framework automatically detects the correct path):
 * ```FAILED_COMMANDS.txt``` - contains failed commands;
 * ```UNDETECTED_COMMANDS.txt``` - contains undetected commands.
@@ -239,7 +238,7 @@ Invoke-DosTestHarness -Functions @('Out-DosConcatenatedCommand')
 4. Develop your regexes, add them in the ```$regexDetectionTerms``` array in [this code block](https://github.com/danielbohannon/Invoke-DOSfuscation/blob/master/Invoke-DOSfuscationTestHarness.psm1#L293-L296) like that:
 ![example1](https://i.ibb.co/Px4DqKk/image.png)
 
-5. Rerun the ```Invoke-DosTestHarness``` and repeat the process until all of the obfuscation function's examples are covered 1 or more times, like this for exmaple:
+5. Rerun the ```Invoke-DosTestHarness```, check the undetected commands and repeat the process until all of the obfuscation function's examples are covered 1 or even more times, like this for example:
 ![Example3]()
 
 6. Comment on the Issue with a specific Task you've solved and include your regexes. After we all assure that the suggested solution is correct, create a Sigma rule and a pull request to the OSCD's Branch of the [Sigma Repository](https://github.com/Neo23x0/sigma/).
