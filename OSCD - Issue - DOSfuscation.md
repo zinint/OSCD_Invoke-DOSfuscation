@@ -187,8 +187,11 @@ this command generates (with default argument settings) over 1000 randomly-obfus
 Get-DosDetectionMatch
 ```
 this function checks an input command (string) against all regex detection values input into the ```$regexDetectionTerms``` array in the function. This is automatically called by ```Invoke-DosTestHarness``` but can be called in a stand-alone fashion as well.
-5. As a result two files will be generated in the frameworks folder:
-* ```FAILED_COMMANDS.txt``` - conatains failed commands.
+5. you will see the results at the end in a table like this:
+![example2]()
+
+also two files will be generated in the framework's folder (framework automatically detects the correct path):
+* ```FAILED_COMMANDS.txt``` - conatains failed commands;
 * ```UNDETECTED_COMMANDS.txt``` - contains undetected commands.
 
 ## How To Work with Tasks
@@ -227,7 +230,7 @@ If you would like to assign yourself to some of the tasks listed above, you shou
 Import-Module .\Invoke-DOSfuscation.psd1
 ```
 
-3. Run the Invoke-DosTestHarness using the ```-Functions``` argument to specify which obfuscation function you chose. </br> E.g. you chose the Task #1:
+3. Run the Invoke-DosTestHarness using the ```-Functions``` argument to specify which obfuscation function you chose. </br> E.g. if you chose the Task #1 run the following command:
 ```powershell
 InvokeDosTestHarness -Functions @('Out-DosConcatenatedCommand')
 ```
