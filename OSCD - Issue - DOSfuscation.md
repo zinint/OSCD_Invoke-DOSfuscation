@@ -243,7 +243,7 @@ check the ```UNDETECTED_COMMANDS.txt```.</br>
 ```powershell
 Import-Module .\Invoke-DOSfuscation.psd1 -Force
 ```
-rerun the ```Invoke-DosTestHarness```, check the ```UNDETECTED_COMMANDS.txt``` again and repeat the whole process until all of the obfuscation function's examples are covered 1 or even more times, like this for example:
-![Example3]()
+rerun the ```Invoke-DosTestHarness```, check the ```UNDETECTED_COMMANDS.txt``` again and repeat the whole process until all of the obfuscation function's examples are covered and there is no more ```UNDETECTED_COMMANDS.txt```, like this for example:
+![Example3](https://i.ibb.co/TYLp33v/image.png)
 
  6. Comment on the Issue with a specific Task you've solved and include your regexes. After we all assure that the suggested solution is correct, create a Sigma rule and a pull request to the OSCD's Branch of the [Sigma Repository](https://github.com/Neo23x0/sigma/).
