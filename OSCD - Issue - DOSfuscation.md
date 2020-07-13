@@ -187,7 +187,8 @@ this command generates (with default argument settings) over 1000 randomly-obfus
 Get-DosDetectionMatch
 ```
 this function checks an input command (string) against all regex detection values input into the ```$regexDetectionTerms``` array in the function. This is automatically called by ```Invoke-DosTestHarness``` but can be called in a stand-alone fashion as well.
-5. You will see the results at the end in a table like this:
+
+ 5. You will see the results at the end in a table like this:
 ![example2]()
 
 also two files will be generated in the framework's folder (framework automatically detects the correct path):
