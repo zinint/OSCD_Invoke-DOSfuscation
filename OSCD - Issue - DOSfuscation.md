@@ -172,7 +172,7 @@ Some basic building block concepts for each of the advanced encoding techniques 
    cmd /V:ON /C “set command=neZsZ7Z /7no&&  set sub2=!command:7=a!&&set sub1=!sub2:Z=t!&&CALL %sub1%”
    ```
 
-The examples listed above are extremely basic and should be used only as a starting point for detection development. However, this should begin reducing the amount of data returned from initial searches. In the case of small environments there may not be much noise at all to filter out. However, in other environments there might be one of many enterprise applications that legitimately uses FOR loops, variable substrings and concatenated strings on the command line in high quantities. In these environments multiple iterations and layers of detection tuning may be required.
+The examples listed above are extremely basic and should be used only as a starting point for detection development.
 
 Another example is CMD argument obfuscation. An obvious first choice would be anchoring these detections on process executions with arguments containing `/C`, but there are numerous pitfalls to consider if using this approach:
 
