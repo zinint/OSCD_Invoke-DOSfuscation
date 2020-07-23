@@ -145,12 +145,8 @@ As Daniel Bohannon ([@danielhbohannon](https://twitter.com/danielhbohannon)) poi
 Some basic building block concepts for each of the advanced encoding techniques are outlined below, `netstat -ano` is used as an example command:
 
 * Concatenation
-   * Numerous `set` commands + logical operators `&` or `&&` + `call` command 
+   * Numerous `set` commands + logical operators `&` or `&&` + `call` command and multiple adjacent environment variables for concatenation reassembly
    ```cmd
-   cmd /c “set com3= /ano&&set com2=stat&&set com1=net&& call set final=%com1%%com2%%com3%&&call%final%”
-   ```
-   * Multiple adjacent environment variables for concatenation reassembly
-   ``` cmd
    cmd /c “set com3= /ano&&set com2=stat&&set com1=net&& call set final=%com1%%com2%%com3%&&call %final%”
    ```
    
