@@ -149,13 +149,13 @@ Some basic building block concepts for each of the advanced encoding techniques 
 * FORcoding
    * `set` command + for loop syntax + variable substring syntax like  `!var:~%A,1!` + `if` statement + `callcommand` + variable substring syntax like `%var:~7%`, `%var:~-12%` or `!var:~%A,1!`
    ``` cmd
-   cmd /V:ON /C “set unique=nets/ao&&FOR %AIN (0 1 2 3 2 6 2 4 5 6 0 7 1337) DO set final=!final!!unique:~%A,1!&&IF %A==1337 CALL %final:~-12%”
+   cmd /V:ON /C "set unique=nets /ao&&FOR %A IN (0 1 2 3 2 6 2 4 5 6 0 7 1337) DO set final=!final!!unique:~%A,1!&&IF %A==1337 CALL %final:~-12%"
    ```
    
 * Reversal
    * Similar to #2 (FORcoding) but can include the for loop’s `/L` argument + start/increment/end integers
    ```cmd
-   cmd /V:ON /C “set reverse=ona/ tatsten&& FOR /L %AIN (11 -1 0) DO set final=!final!!reverse:~%A,1!&&IF %A==0 CALL %final:~-12%”
+   cmd /V:ON /C “set reverse=ona/ tatsten&& FOR /L %A IN (11 -1 0) DO set final=!final!!reverse:~%A,1!&&IF %A==0 CALL %final:~-12%”
    ```
    
 * FINcoding
